@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Vape Art</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="password">password</string>
+    <string name="email">email</string>
+    <string name="create_a_new_account">Create a new Account</string>
+    <string name="do_not_have_an_account">Don\'t have an Account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="home">Home</string>
+    <string name="wish_list">wish list</string>
+    <string name="basket">basket</string>
+    <string name="search">search</string>
+    <string name="wrong_email">email is wrong</string>
+    <string name="wrong_password">password must be greater than 6 characters</string>
+    <string name="wrong_confirm_password">confirm password does not match</string>
+    <string name="warning">Something went wrong</string>
+    <string name="email_warning">There is no user with this email, please create an account</string>
+    <string name="registration_is_successful">Registration was successful, please login</string>
+    <string name="category">Categories</string>
+    <string name="devices">Devices</string>
+    <string name="disposable_devices">Disposable devices</string>
+    <string name="atomizers">Atomizers</string>
+    <string name="regular_liquids">Regular liquids</string>
+    <string name="salt_nicotine_liquids">Salt nicotine liquids</string>
+    <string name="cartridges_and_coils">Cartridges and coils</string>
+    <string name="best_sellers">Best sellers</string>
+    <string name="new_products">New products</string>
+    <string name="discounts">Discounts</string>
+    <string name="azn">AZN</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="buy_from_whatsapp">Buy from whatsapp</string>
+    <string name="price">Price</string>
+</resources>

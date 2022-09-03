@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="text_style1">
+        <item name="android:fontFamily">@font/salsa</item>
+        <item name="android:textColor">@color/my_orange</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_style2">
+        <item name="android:fontFamily">@font/salsa</item>
+        <item name="android:textColor">@color/teal_200</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_style3">
+        <item name="android:fontFamily">@font/salsa</item>
+        <item name="android:textColor">@color/my_orange</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="button_text_style1">
+        <item name="android:fontFamily">@font/salsa</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="price_style1">
+        <item name="android:fontFamily">@font/salsa</item>
+        <item name="android:textColor">@color/my_orange</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+</resources>

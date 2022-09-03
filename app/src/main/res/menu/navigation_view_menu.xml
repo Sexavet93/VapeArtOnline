@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/category">
+        <menu>
+            <item
+                android:id="@+id/devices"
+                android:title="@string/devices"
+                android:icon="@drawable/menu_device"/>
+            <item
+                android:id="@+id/disposableDevices"
+                android:title="@string/disposable_devices"
+                android:icon="@drawable/menu_disposable_devices"/>
+            <item
+                android:id="@+id/atomizers"
+                android:title="@string/atomizers"
+                android:icon="@drawable/menu_atomizer"/>
+            <item
+                android:id="@+id/cartridgeAndCoils"
+                android:title="@string/cartridges_and_coils"
+                android:icon="@drawable/menu_coils"/>
+            <item
+                android:id="@+id/regularLiquids"
+                android:title="@string/regular_liquids"
+                android:icon="@drawable/menu_liquid"/>
+            <item
+                android:id="@+id/saltNicotineLiquids"
+                android:title="@string/salt_nicotine_liquids"
+                android:icon="@drawable/menu_liquid2"/>
+        </menu>
+    </item>
+
+</menu>

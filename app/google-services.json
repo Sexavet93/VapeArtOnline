@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1027053932596",
+    "project_id": "fir-db-6df41",
+    "storage_bucket": "fir-db-6df41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027053932596:android:efad67bf4f90033ca2ba61",
+        "android_client_info": {
+          "package_name": "com.vapeart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027053932596-br3fa3qshvumnf8httb7393hv4hrgnpu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vapeart",
+            "certificate_hash": "c1267b805d7b0ce417175c66dae7239bc0d78988"
+          }
+        },
+        {
+          "client_id": "1027053932596-ddqe8s3f5sqbl9904tquhdb1ao2l6v8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKFSvqnMO3vUBFil8ZPN_DVyesWijedFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027053932596-ddqe8s3f5sqbl9904tquhdb1ao2l6v8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

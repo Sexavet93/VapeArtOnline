@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.vapeart.presentation.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.vapeart.presentation.fragments.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.vapeart.presentation.fragments.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.vapeart.presentation.fragments.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.vapeart.presentation.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/wishListFragment"
+        android:name="com.vapeart.presentation.fragments.WishListFragment"
+        android:label="fragment_wish_list"
+        tools:layout="@layout/fragment_wish_list" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.vapeart.presentation.fragments.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="item"
+            app:argType="com.vapeart.domain.Item" />
+        <argument
+            android:name="image"
+            app:argType="android.graphics.Bitmap"
+            app:nullable="true" />
+    </fragment>
+</navigation>

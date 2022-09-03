@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/itemImage"
+        android:layout_width="50dp"
+        android:layout_height="75dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/progressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="22.5dp"
+        android:src="@drawable/progress_animation"/>
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemImage"
+        tools:text="Name description"
+        android:ellipsize="end"
+        android:lines="1"/>
+
+    <TextView
+        android:id="@+id/currentPriceTextView"
+        style="@style/price_style1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/oldPriceTextView"
+        app:layout_constraintTop_toBottomOf="@id/nameTextView"
+        app:layout_constraintHorizontal_bias="0.4"
+        tools:text="25.00" />
+
+    <TextView
+        android:id="@+id/staticTextView"
+        android:layout_width="20dp"
+        android:layout_height="10dp"
+        app:layout_constraintStart_toEndOf="@id/currentPriceTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/oldPriceTextView"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="3dp"
+        android:text="AZN"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        android:textColor="@color/my_orange"/>
+
+    <TextView
+        android:id="@+id/oldPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/staticTextView2"
+        app:layout_constraintTop_toBottomOf="@id/nameTextView"
+        android:textStyle="bold"
+        android:textColor="@color/grey"
+        android:textSize="15sp"
+        android:fontFamily="@font/salsa"
+        android:foreground="@drawable/strikethrough"
+        tools:text="25.00"/>
+
+    <TextView
+        android:id="@+id/staticTextView2"
+        android:layout_width="20dp"
+        android:layout_height="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_marginBottom="3dp"
+        android:text="@string/azn"
+        android:textSize="8sp"
+        android:textStyle="bold"
+        android:textColor="@color/grey"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/priceGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="oldPriceTextView, staticTextView2"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
