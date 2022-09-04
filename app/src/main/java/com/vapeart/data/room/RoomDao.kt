@@ -7,14 +7,20 @@ import androidx.room.*
 interface RoomDao {
 
     @Query("SELECT * FROM selecteditem")
-    fun getItems(): LiveData<List<SelectedItem>>
+    fun getSelectedItems(): LiveData<List<SelectedItem>>
 
     @Query("SELECT * FROM selecteditem WHERE id=(:id)")
-    fun getItem(id: String): LiveData<SelectedItem>
+    fun getSelectedItem(id: String): LiveData<SelectedItem>
 
     @Insert
-    fun addItem(item: SelectedItem)
+    fun addSelectedItem(item: SelectedItem)
+
+    @Insert
+    fun addFavoriteItem(item: FavoriteItem)
 
     @Delete
-    fun deleteItem(item: SelectedItem)
+    fun deleteSelectedItem(item: SelectedItem)
+
+    @Delete
+    fun deleteFavoriteItem(item: FavoriteItem)
 }

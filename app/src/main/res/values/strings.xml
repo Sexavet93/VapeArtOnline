@@ -32,6 +32,12 @@
     <string name="discounts">Discounts</string>
     <string name="azn">AZN</string>
     <string name="add_to_cart">Add to cart</string>
-    <string name="buy_from_whatsapp">Buy from whatsapp</string>
+    <string name="buy_from_whatsapp">Buy from WhatsApp</string>
     <string name="price">Price</string>
+    <string name="item_added_to_cart">"Item added to cart"</string>
+    <string name="install_whatsapp">"Please install WhatsApp"</string>
+    <string name="whatsapp_message">"I want to buy this product: "</string>
+    <string name="item_quantity_warning">"Item quantity must be greater than 0"</string>
+    <string name="add_favorite_item">"Device is added to Favorite list"</string>
+    <string name="delete_favorite_item">"Device is deleted from Favorite list"</string>
 </resources>

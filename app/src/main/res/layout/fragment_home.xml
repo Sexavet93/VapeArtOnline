@@ -36,9 +36,10 @@
             app:layout_constraintTop_toBottomOf="@id/tabLayout"
             android:text="@string/best_sellers"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="-270dp"
-            style="@style/button_text_style1"
-            android:textColor="@color/teal_200"/>
+            app:layout_constraintHorizontal_bias="0.05"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bestSellersRV"
@@ -47,7 +48,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bestSellersTextView"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="15dp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.6dp"
+            app:layout_constraintStart_toStartOf="@id/bestSellersRV"
+            app:layout_constraintEnd_toEndOf="@id/bestSellersRV"
+            app:layout_constraintTop_toBottomOf="@id/bestSellersRV"
+            android:background="@color/grey"/>
 
         <TextView
             android:id="@+id/newProductsTextView"
@@ -57,10 +66,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bestSellersRV"
             android:text="@string/new_products"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="-250dp"
-            style="@style/button_text_style1"
-            android:textColor="@color/teal_200"/>
+            android:layout_marginTop="15dp"
+            app:layout_constraintHorizontal_bias="0.05"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newProductsRV"
@@ -71,6 +81,14 @@
             app:layout_constraintTop_toBottomOf="@id/newProductsTextView"
             android:layout_marginTop="10dp"/>
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.6dp"
+            app:layout_constraintStart_toStartOf="@id/newProductsRV"
+            app:layout_constraintEnd_toEndOf="@id/newProductsRV"
+            app:layout_constraintTop_toBottomOf="@id/newProductsRV"
+            android:background="@color/grey"/>
+
         <TextView
             android:id="@+id/allProductsTextView"
             android:layout_width="wrap_content"
@@ -79,10 +97,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/discountsRV"
             android:text="@string/discounts"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="-280dp"
-            style="@style/button_text_style1"
-            android:textColor="@color/teal_200"/>
+            android:layout_marginBottom="20dp"
+            app:layout_constraintHorizontal_bias="0.05"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/discountsRV"
