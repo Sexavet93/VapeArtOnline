@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class SelectedItem(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     val id: String,
     var amount: Int = 0,
     var isInFavorites: Boolean = false

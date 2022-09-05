@@ -2,6 +2,7 @@ package com.vapeart.data.repositories
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import com.vapeart.data.room.FavoriteItem
 import com.vapeart.data.room.RoomDB
@@ -10,11 +11,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-private const val ROOM_DB_NAME = "room_database"
-
 class RoomRepository private constructor(context: Context) {
 
-    private val roomDB = Room.databaseBuilder(context, RoomDB::class.java, ROOM_DB_NAME).build()
+    private val roomDB = RoomDB.getInstance(context)
     private val dao = roomDB.getDao()
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
@@ -28,6 +27,10 @@ class RoomRepository private constructor(context: Context) {
 
     fun addSelectedItem(item: SelectedItem){
         coroutineScope.launch { dao.addSelectedItem(item) }
+    }
+
+    fun getFavoriteItem(id: String): LiveData<FavoriteItem> {
+        return dao.getFavoriteItem(id)
     }
 
     fun addFavoriteItem(item: FavoriteItem){

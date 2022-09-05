@@ -10,9 +10,12 @@ import com.vapeart.data.room.SelectedItem
 class DetailsFragmentViewModel: ViewModel() {
 
     private val roomRepo = RoomRepository.getInstance()
+    private var _favoriteItemLiveData: MutableLiveData<FavoriteItem> = MutableLiveData()
+    lateinit var favoriteItemLiveData: LiveData<FavoriteItem>
+//    get() = _favoriteItemLiveData
 
-    fun addSelectedItem(item: SelectedItem){
-        roomRepo.addSelectedItem(item)
+    fun getFavoriteItem(id: String){
+        favoriteItemLiveData = roomRepo.getFavoriteItem(id)
     }
 
     fun addFavoriteItem(item: FavoriteItem){
@@ -21,5 +24,8 @@ class DetailsFragmentViewModel: ViewModel() {
 
     fun deleteFavoriteItem(item: FavoriteItem){
         roomRepo.deleteFavoriteItem(item)
+    }
+    fun addSelectedItem(item: SelectedItem){
+        roomRepo.addSelectedItem(item)
     }
 }

@@ -14,7 +14,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="65dp"
             android:background="@color/my_brown"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/menu"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:background="@drawable/ic_menu"
                 android:focusable="true"
                 android:clickable="true"
@@ -38,8 +38,8 @@
 
             <ImageView
                 android:id="@+id/phone"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="30dp"
                 android:background="@drawable/ic_phone"
                 android:focusable="true"
@@ -48,8 +48,8 @@
 
             <FrameLayout
                 android:id="@+id/cart"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/ic_bag"
                 android:clickable="true"
@@ -69,8 +69,8 @@
 
             <ImageView
                 android:id="@+id/dropdownMenu"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/ic_dropdown_menu"
                 android:focusable="true"

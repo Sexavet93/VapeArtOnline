@@ -14,6 +14,7 @@ import com.vapeart.R
 import com.vapeart.databinding.ActivityMainBinding
 import com.vapeart.presentation.Navigator
 import com.vapeart.presentation.fragments.HomeFragmentDirections
+import com.vapeart.presentation.fragments.SignInFragmentDirections
 import com.vapeart.presentation.viewmodels.MainActivityViewModel
 
 private const val SIGN_OUT_BUTTON = "Sign Out"
@@ -42,10 +43,10 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     private fun checkRegisteredUser(){
-        if(!viewModel.isUserRegistered()){
-            viewVisibility(false)
-            navigate(HomeFragmentDirections.actionHomeFragmentToSignInFragment(""))
-        }
+        if(viewModel.isUserRegistered()){
+//            viewVisibility(false)
+            navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
+        } else viewVisibility(false)
     }
 
     override fun navigate(direction: NavDirections) {

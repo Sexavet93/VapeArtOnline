@@ -53,7 +53,7 @@ class MainAdapter(private val navigator: Navigator): ListAdapter<Item, MainAdapt
         val binding: MainAdapterItemLayoutBinding = MainAdapterItemLayoutBinding.bind(view)
         var isOnClickListenerSet: Boolean = false
 
-        fun setOnClickListener(item: Item, photo: Bitmap?){
+        fun setOnClickListener(item: Item, photo: Bitmap){
             if(!isOnClickListenerSet){
                 binding.root.setOnClickListener{
                     navigator.navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item,photo))

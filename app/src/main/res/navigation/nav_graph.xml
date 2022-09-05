@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -94,7 +94,6 @@
             app:argType="com.vapeart.domain.Item" />
         <argument
             android:name="image"
-            app:argType="android.graphics.Bitmap"
-            app:nullable="true" />
+            app:argType="android.graphics.Bitmap" />
     </fragment>
 </navigation>

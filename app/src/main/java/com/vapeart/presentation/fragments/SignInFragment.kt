@@ -22,12 +22,12 @@ class SignInFragment : Fragment() {
     private lateinit var navigator: Navigator
     private lateinit var email: String
     private var password: String = ""
-    private val arguments: SignInFragmentArgs by navArgs()
+//    private val arguments: SignInFragmentArgs by navArgs()
     private val viewModel: SignInFragmentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        email = arguments.email
+        email = ""
         navigator = requireActivity() as Navigator
     }
 

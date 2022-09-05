@@ -18,7 +18,6 @@ import com.vapeart.databinding.FragmentDetailsBinding
 import com.vapeart.domain.Item
 import com.vapeart.presentation.utils.Assistant
 import com.vapeart.presentation.viewmodels.DetailsFragmentViewModel
-import kotlin.math.exp
 
 class DetailsFragment : Fragment() {
 
@@ -29,6 +28,7 @@ class DetailsFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("DetailsFragment binding is null")
     private lateinit var item: Item
     private lateinit var selectedItem: SelectedItem
+    private lateinit var favoriteItem: FavoriteItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentDetailsBinding.inflate(inflater,container,false)
@@ -39,6 +39,11 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         item = arguments.item
         selectedItem = SelectedItem(item.id)
+        viewModel.getFavoriteItem(item.id)
+        viewModel.favoriteItemLiveData.observe(viewLifecycleOwner){
+            favoriteItem = it ?: FavoriteItem(item.id,false)
+            setFavoriteButtonTextAndImage()
+        }
         setFragmentContent()
         setAppendAndRemoveButtonListeners()
         setAddToCartButtonListener()
@@ -111,19 +116,17 @@ class DetailsFragment : Fragment() {
     }
 
     private fun setAddToFavoritesButtonListener(){
-        val favoriteItem = FavoriteItem(item.id)
-        var isFavorite = false
         binding.apply {
             addToFavoritesButton.setOnClickListener{
-                if(!isFavorite){
+                if(!favoriteItem.isFavorite){
+                    favoriteItem.isFavorite = true
                     viewModel.addFavoriteItem(favoriteItem)
-                    addToFavoritesButton.setImageResource(R.drawable.ic_favorite_checked)
-                    isFavorite = true
+                    setFavoriteButtonTextAndImage()
                     showToast(getString(R.string.add_favorite_item))
                 } else {
+                    favoriteItem.isFavorite = false
                     viewModel.deleteFavoriteItem(favoriteItem)
-                    addToFavoritesButton.setImageResource(R.drawable.ic_favorite_unchecked)
-                    isFavorite = false
+                    setFavoriteButtonTextAndImage()
                     showToast(getString(R.string.delete_favorite_item))
                 }
             }
@@ -137,5 +140,18 @@ class DetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setFavoriteButtonTextAndImage(){
+        binding.apply {
+            if(favoriteItem.isFavorite){
+                addToFavoritesButton.setImageResource(R.drawable.ic_favorite_checked)
+                addToFavoriteTextView.text = getString(R.string.favorite_button_text_true)
+            }
+            else {
+                addToFavoritesButton.setImageResource(R.drawable.ic_favorite_unchecked)
+                addToFavoriteTextView.text = getString(R.string.favorite_button_text_false)
+            }
+        }
     }
 }

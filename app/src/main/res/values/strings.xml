@@ -38,6 +38,8 @@
     <string name="install_whatsapp">"Please install WhatsApp"</string>
     <string name="whatsapp_message">"I want to buy this product: "</string>
     <string name="item_quantity_warning">"Item quantity must be greater than 0"</string>
-    <string name="add_favorite_item">"Device is added to Favorite list"</string>
-    <string name="delete_favorite_item">"Device is deleted from Favorite list"</string>
+    <string name="add_favorite_item">"Device is added to Wish list"</string>
+    <string name="delete_favorite_item">"Device is deleted from Wish list"</string>
+    <string name="favorite_button_text_true">"delete from wish list"</string>
+    <string name="favorite_button_text_false">"add to wish list"</string>
 </resources>
