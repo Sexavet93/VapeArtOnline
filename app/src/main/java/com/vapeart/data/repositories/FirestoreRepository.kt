@@ -59,6 +59,7 @@ class FirestoreRepository private constructor() {
                     if (task.isSuccessful) {
                         for (item in task.result) {
                             val myItem = item.toObject(Item::class.java)
+                            myItem.id = item.id
                             myItem.description = myItem.description.replace("\\n", "\n")
                             newItemList.add(myItem)
                             newItemLiveData.postValue(newItemList)
@@ -77,6 +78,7 @@ class FirestoreRepository private constructor() {
                     if (task.isSuccessful) {
                         for (item in task.result) {
                             val myItem = item.toObject(Item::class.java)
+                            myItem.id = item.id
                             myItem.description = myItem.description.replace("\\n", "\n")
                             discountsList.add(myItem)
                             discountsLiveData.postValue(discountsList)
