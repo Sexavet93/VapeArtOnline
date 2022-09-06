@@ -14,11 +14,9 @@ import com.vapeart.domain.Item
 class HomeFragmentViewModel: ViewModel() {
 
     private val firestoreRepo: FirestoreRepository = FirestoreRepository.getInstance()
-    private val roomRepo: RoomRepository = RoomRepository.getInstance()
 
     val bestSellersResponseLiveData : LiveData<List<Item>> = firestoreRepo.getBestSellersLiveData()
     val newItemsResponseLiveData : LiveData<List<Item>> = firestoreRepo.getNewItemList()
     val discountsResponseLiveData : LiveData<List<Item>> = firestoreRepo.getDiscountsList()
-//    val favoriteItemLiveData: LiveData<FavoriteItem>
 
 }

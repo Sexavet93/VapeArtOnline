@@ -1,24 +1,22 @@
 package com.vapeart.presentation.adapters
 
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.vapeart.R
 import com.vapeart.databinding.MainAdapterItemLayoutBinding
 import com.vapeart.domain.Item
-import com.vapeart.presentation.Navigator
+import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.fragments.HomeFragmentDirections
-import com.vapeart.presentation.utils.DiffCallback
+import com.vapeart.presentation.utils.DiffCallbacks
 import com.vapeart.presentation.utils.GlideCustomTarget
 
-class MainAdapter(private val navigator: Navigator): ListAdapter<Item, MainAdapter.MainViewHolder>(DiffCallback()) {
+class MainAdapter(private val navigator: Navigator): ListAdapter<Item, MainAdapter.MainViewHolder>(DiffCallbacks.mainAdapterDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.MainViewHolder {
         val view = LayoutInflater
@@ -55,9 +53,9 @@ class MainAdapter(private val navigator: Navigator): ListAdapter<Item, MainAdapt
 
         fun setOnClickListener(item: Item, photo: Bitmap){
             if(!isOnClickListenerSet){
+                isOnClickListenerSet = true
                 binding.root.setOnClickListener{
                     navigator.navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item,photo))
-                    isOnClickListenerSet = true
                 }
             }
         }

@@ -25,9 +25,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/ic_menu"
-                android:focusable="true"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"/>
+                style="@style/clickable_button_style"/>
 
             <ImageView
                 android:layout_width="150dp"
@@ -42,9 +40,7 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="30dp"
                 android:background="@drawable/ic_phone"
-                android:focusable="true"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground" />
+                style="@style/clickable_button_style"/>
 
             <FrameLayout
                 android:id="@+id/cart"
@@ -52,18 +48,18 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/ic_bag"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground">
+                style="@style/clickable_button_style">
 
                 <TextView
-                    android:id="@+id/itemCount"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/selectedItemCount"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_gravity="end"
                     android:background="@drawable/round_shape"
                     android:gravity="center"
-                    android:visibility="gone" />
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    tools:text="1"/>
 
             </FrameLayout>
 
@@ -73,9 +69,7 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="15dp"
                 android:background="@drawable/ic_dropdown_menu"
-                android:focusable="true"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground" />
+                style="@style/clickable_button_style" />
 
         </androidx.appcompat.widget.Toolbar>
 

@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignUpBinding
-import com.vapeart.presentation.Navigator
+import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.utils.TextWatcherImpl
 import com.vapeart.presentation.viewmodels.SignUpFragmentViewModel
 

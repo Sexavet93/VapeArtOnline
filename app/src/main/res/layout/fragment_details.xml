@@ -93,8 +93,7 @@
                 app:layout_constraintHorizontal_bias="0.1"
                 style="@style/button_text_style1"
                 android:ellipsize="end"
-                android:lines="1"
-                android:text="@string/hello_blank_fragment" />
+                android:lines="1" />
 
             <TextView
                 android:id="@+id/price"
@@ -115,17 +114,13 @@
                 app:layout_constraintTop_toBottomOf="@id/itemNameTextViewBottom"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="7dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/grey"
-                android:foreground="@drawable/bold_strikethrough"
-                android:fontFamily="@font/salsa"
+                style="@style/old_price_text_style"
                 tools:text="40.00"/>
 
             <TextView
                 android:id="@+id/currencyTextView1"
                 android:layout_width="wrap_content"
-                android:layout_height="15sp"
+                android:layout_height="15dp"
                 app:layout_constraintStart_toEndOf="@id/oldPriceTextView"
                 app:layout_constraintTop_toBottomOf="@id/itemNameTextViewBottom"
                 android:layout_marginTop="12dp"
@@ -148,7 +143,7 @@
             <TextView
                 android:id="@+id/currencyTextView2"
                 android:layout_width="wrap_content"
-                android:layout_height="15sp"
+                android:layout_height="15dp"
                 app:layout_constraintStart_toEndOf="@id/currentPriceTextView"
                 app:layout_constraintTop_toBottomOf="@id/itemNameTextViewBottom"
                 android:layout_marginTop="12dp"
@@ -177,14 +172,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="oldPriceTextView, currencyTextView1"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/firstLinearLayout"
+        android:id="@+id/addToCartCalculator"
         android:layout_width="150dp"
         android:layout_height="30dp"
         app:layout_constraintBottom_toTopOf="@+id/buyFromWhatsappButton"
@@ -214,9 +209,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:background="@drawable/ic_add"
-            android:focusable="true"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"/>
+            style="@style/clickable_button_style"/>
 
         <ImageButton
             android:id="@+id/removeItemButton"
@@ -228,9 +221,7 @@
             android:textSize="35sp"
             android:textStyle="bold"
             android:background="@drawable/ic_remove"
-            android:focusable="true"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"/>
+            style="@style/clickable_button_style"/>
 
     </LinearLayout>
 
@@ -240,16 +231,13 @@
         android:layout_height="30dp"
         app:layout_constraintBottom_toTopOf="@+id/buyFromWhatsappButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/firstLinearLayout"
+        app:layout_constraintStart_toEndOf="@+id/addToCartCalculator"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="15dp"
         android:layout_marginStart="15dp"
         android:background="@drawable/rounded_corners"
         android:backgroundTint="@color/teal_200"
-        android:orientation="horizontal"
-        android:focusable="true"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        style="@style/clickable_button_style">
 
         <ImageView
             android:layout_width="30dp"
@@ -278,9 +266,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="20dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        style="@style/clickable_button_style">
 
         <ImageView
             android:layout_width="40dp"

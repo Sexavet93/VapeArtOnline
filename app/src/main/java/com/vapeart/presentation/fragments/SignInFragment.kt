@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignInBinding
-import com.vapeart.presentation.Navigator
+import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.utils.TextWatcherImpl
 import com.vapeart.presentation.viewmodels.SignInFragmentViewModel
 
@@ -22,12 +22,12 @@ class SignInFragment : Fragment() {
     private lateinit var navigator: Navigator
     private lateinit var email: String
     private var password: String = ""
-//    private val arguments: SignInFragmentArgs by navArgs()
+    private val arguments: SignInFragmentArgs by navArgs()
     private val viewModel: SignInFragmentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        email = ""
+        email = arguments.email
         navigator = requireActivity() as Navigator
     }
 

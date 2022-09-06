@@ -21,16 +21,20 @@ class RoomRepository private constructor(context: Context) {
         return dao.getSelectedItems()
     }
 
+    fun getFavoriteItems(): LiveData<List<FavoriteItem>>{
+        return dao.getFavoriteItems()
+    }
+
     fun getSelectedItem(id: String): LiveData<SelectedItem>{
         return dao.getSelectedItem(id)
     }
 
-    fun addSelectedItem(item: SelectedItem){
-        coroutineScope.launch { dao.addSelectedItem(item) }
-    }
-
     fun getFavoriteItem(id: String): LiveData<FavoriteItem> {
         return dao.getFavoriteItem(id)
+    }
+
+    fun addSelectedItem(item: SelectedItem){
+        coroutineScope.launch { dao.addSelectedItem(item) }
     }
 
     fun addFavoriteItem(item: FavoriteItem){

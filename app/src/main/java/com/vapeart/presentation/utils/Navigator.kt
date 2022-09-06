@@ -1,4 +1,4 @@
-package com.vapeart.presentation
+package com.vapeart.presentation.utils
 
 import androidx.navigation.NavDirections
 

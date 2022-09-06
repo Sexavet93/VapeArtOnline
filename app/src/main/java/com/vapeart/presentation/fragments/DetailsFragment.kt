@@ -19,6 +19,8 @@ import com.vapeart.domain.Item
 import com.vapeart.presentation.utils.Assistant
 import com.vapeart.presentation.viewmodels.DetailsFragmentViewModel
 
+const val  DEFAULT_ITEM_AMOUNT_SIZE = "0"
+
 class DetailsFragment : Fragment() {
 
     private val viewModel: DetailsFragmentViewModel by viewModels()
@@ -38,17 +40,36 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         item = arguments.item
-        selectedItem = SelectedItem(item.id)
         viewModel.getFavoriteItem(item.id)
-        viewModel.favoriteItemLiveData.observe(viewLifecycleOwner){
-            favoriteItem = it ?: FavoriteItem(item.id,false)
-            setFavoriteButtonTextAndImage()
-        }
+        viewModel.getSelectedItem(item.id)
+        setViewModelsObservers()
         setFragmentContent()
         setAppendAndRemoveButtonListeners()
         setAddToCartButtonListener()
         setByFromWhatsappButtonListener()
         setAddToFavoritesButtonListener()
+    }
+
+    private fun setViewModelsObservers(){
+        viewModel.favoriteItemLiveData.observe(viewLifecycleOwner){
+            favoriteItem = it ?: FavoriteItem(
+                item.id,
+                item.name,
+                item.imageUri,
+                item.currentPrice,
+                item.manufacturer,
+                false)
+            setFavoriteButtonTextAndImage()
+        }
+        viewModel.selectedItemLiveData.observe(viewLifecycleOwner){
+            selectedItem = it ?: SelectedItem(
+                item.id,
+                item.name,
+                item.imageUri,
+                item.currentPrice,
+                item.manufacturer,
+                0)
+        }
     }
 
     private fun setFragmentContent(){
@@ -89,9 +110,10 @@ class DetailsFragment : Fragment() {
             try {
                 val itemAmount = binding.itemAmountTextView.text.toString().toInt()
                 if(itemAmount > 0){
-                    selectedItem.amount = itemAmount
+                    selectedItem.amount += itemAmount
                     viewModel.addSelectedItem(selectedItem)
                     showToast(getString(R.string.item_added_to_cart))
+                    binding.itemAmountTextView.text = DEFAULT_ITEM_AMOUNT_SIZE
                 }else showToast(getString(R.string.item_quantity_warning))
             } catch (exception: Exception){
                 showToast(getString(R.string.warning))
@@ -121,12 +143,10 @@ class DetailsFragment : Fragment() {
                 if(!favoriteItem.isFavorite){
                     favoriteItem.isFavorite = true
                     viewModel.addFavoriteItem(favoriteItem)
-                    setFavoriteButtonTextAndImage()
                     showToast(getString(R.string.add_favorite_item))
                 } else {
                     favoriteItem.isFavorite = false
                     viewModel.deleteFavoriteItem(favoriteItem)
-                    setFavoriteButtonTextAndImage()
                     showToast(getString(R.string.delete_favorite_item))
                 }
             }

@@ -37,4 +37,19 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
     </style>
+
+    <style name="old_price_text_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:foreground">@drawable/bold_strikethrough</item>
+        <item name="android:fontFamily">@font/salsa</item>
+    </style>
+
+    <style name="clickable_button_style">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+
+    </style>
 </resources>

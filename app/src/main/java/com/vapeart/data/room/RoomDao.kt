@@ -10,6 +10,9 @@ interface RoomDao {
     @Query("SELECT * FROM selecteditem")
     fun getSelectedItems(): LiveData<List<SelectedItem>>
 
+    @Query("SELECT * FROM favoriteitem")
+    fun getFavoriteItems(): LiveData<List<FavoriteItem>>
+
     @Query("SELECT * FROM selecteditem WHERE id=(:id)")
     fun getSelectedItem(id: String): LiveData<SelectedItem>
 

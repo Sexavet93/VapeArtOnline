@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey
 data class SelectedItem(
     @PrimaryKey(autoGenerate = false)
     val id: String,
-    var amount: Int = 0,
-    var isInFavorites: Boolean = false
+    var itemName: String = "",
+    var imageUri: String = "",
+    var currentPrice: String = "",
+    var manufacturer: String = "",
+    var amount: Int = 0
 )

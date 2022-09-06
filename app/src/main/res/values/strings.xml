@@ -42,4 +42,5 @@
     <string name="delete_favorite_item">"Device is deleted from Wish list"</string>
     <string name="favorite_button_text_true">"delete from wish list"</string>
     <string name="favorite_button_text_false">"add to wish list"</string>
+    <string name="your_wish_list_is_empty">Your wish list is empty</string>
 </resources>
