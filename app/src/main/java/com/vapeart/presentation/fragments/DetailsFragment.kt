@@ -79,7 +79,7 @@ class DetailsFragment : Fragment() {
             itemNameTextViewTop.text = item.name
             brendImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
             itemImageView.setImageBitmap(image)
-            itemNameTextViewBottom.text = item.name
+            itemNameTextView.text = item.name
             currentPriceTextView.text = item.currentPrice
             descriptionTextView.text = item.description
             if(item.oldPrice != "0"){
@@ -157,10 +157,10 @@ class DetailsFragment : Fragment() {
         Toast.makeText(requireContext(), expression, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 
     private fun setFavoriteButtonTextAndImage(){
         binding.apply {

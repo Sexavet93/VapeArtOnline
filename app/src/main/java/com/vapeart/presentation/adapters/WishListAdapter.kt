@@ -16,10 +16,10 @@ import com.vapeart.presentation.fragments.DEFAULT_ITEM_AMOUNT_SIZE
 import com.vapeart.presentation.utils.Assistant
 import com.vapeart.presentation.utils.DiffCallbacks
 import com.vapeart.presentation.utils.GlideCustomTarget
-import com.vapeart.presentation.utils.WishListLayoutCallback
+import com.vapeart.presentation.utils.ItemsManager
 
 class WishListAdapter(
-    private val callback: WishListLayoutCallback
+    private val callback: ItemsManager
 ) : ListAdapter<FavoriteItem, WishListAdapter.WishListHolder>(DiffCallbacks.wishListDiffCallback) {
 
 
@@ -70,7 +70,7 @@ class WishListAdapter(
                         item.manufacturer,
                         itemQuantity
                     )
-                    callback.addToCartCallback(selectedItem)
+                    callback.addToCart(selectedItem)
                     binding.itemAmountTextView.text = DEFAULT_ITEM_AMOUNT_SIZE
                 }
             }
@@ -94,7 +94,7 @@ class WishListAdapter(
 
         fun setOnDeleteButtonListener(item: FavoriteItem) {
             binding.deleteButton.setOnClickListener {
-                callback.deleteItemCallback(item)
+                callback.deleteItem(item)
             }
         }
     }

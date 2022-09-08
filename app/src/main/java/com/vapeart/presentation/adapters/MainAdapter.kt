@@ -1,6 +1,7 @@
 package com.vapeart.presentation.adapters
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,11 @@ import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.fragments.HomeFragmentDirections
 import com.vapeart.presentation.utils.DiffCallbacks
 import com.vapeart.presentation.utils.GlideCustomTarget
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 
-class MainAdapter(private val navigator: Navigator): ListAdapter<Item, MainAdapter.MainViewHolder>(DiffCallbacks.mainAdapterDiffCallback) {
+class MainAdapter(private val navigator: Navigator):
+    ListAdapter<Item, MainAdapter.MainViewHolder>(DiffCallbacks.mainAdapterDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.MainViewHolder {
         val view = LayoutInflater
@@ -35,7 +39,7 @@ class MainAdapter(private val navigator: Navigator): ListAdapter<Item, MainAdapt
                 }
             })
             nameTextView.text = item.name
-            currentPriceTextView.text = item.currentPrice.toString()
+            currentPriceTextView.text = item.currentPrice
             if(item.oldPrice != "0"){
                 priceGroup.visibility = View.VISIBLE
                 oldPriceTextView.text = item.oldPrice
@@ -45,6 +49,7 @@ class MainAdapter(private val navigator: Navigator): ListAdapter<Item, MainAdapt
 
     override fun onViewRecycled(holder: MainViewHolder) {
         holder.binding.progressBar.visibility = View.VISIBLE
+        holder.binding.priceGroup.visibility = View.GONE
     }
 
     inner class MainViewHolder(view: View): RecyclerView.ViewHolder(view){

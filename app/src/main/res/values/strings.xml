@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Vape Art</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in">Sign In</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="password">password</string>
@@ -12,7 +11,7 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="home">Home</string>
     <string name="wish_list">wish list</string>
-    <string name="basket">basket</string>
+    <string name="basket">Basket</string>
     <string name="search">search</string>
     <string name="wrong_email">email is wrong</string>
     <string name="wrong_password">password must be greater than 6 characters</string>
@@ -43,4 +42,9 @@
     <string name="favorite_button_text_true">"delete from wish list"</string>
     <string name="favorite_button_text_false">"add to wish list"</string>
     <string name="your_wish_list_is_empty">Your wish list is empty</string>
+    <string name="your_cart_list_is_empty">Your cart is empty</string>
+    <string name="category_empty">There is no items in this category</string>
+    <string name="delete_all_items">Delete all items</string>
+    <string name="add_item">Add item</string>
+    <string name="delete_item">Delete item</string>
 </resources>

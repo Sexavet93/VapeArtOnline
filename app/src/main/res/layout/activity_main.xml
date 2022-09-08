@@ -98,10 +98,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/navigation_view_menu"
-        app:headerLayout="@layout/navigation_view_header"/>
+        app:headerLayout="@layout/navigation_view_header"
+        android:background="@color/my_brown"
+        app:itemIconTint="@color/my_orange"
+        app:itemTextColor="@color/white"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -5,10 +5,12 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavHost
+import androidx.navigation.navOptions
 import androidx.navigation.ui.setupWithNavController
 import com.vapeart.R
 import com.vapeart.data.room.SelectedItem
@@ -30,17 +32,31 @@ class MainActivity : AppCompatActivity(), Navigator {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        navControllerInitializer()
+        checkRegisteredUser()
     }
 
     override fun onStart() {
         super.onStart()
-        setToolBarDropdownMenu()
         setToolBarMenuButton()
-        navControllerInitializer()
-        checkRegisteredUser()
+        setToolBarDropdownMenu()
+        setNavigationMenu()
         setViewModelObserver()
     }
 
+    private fun setNavigationMenu(){
+        binding.navigationView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.devices ->  navigateWithId(R.id.itemsReviewFragment,"devices")
+                R.id.disposableDevices ->  navigateWithId(R.id.itemsReviewFragment,"disposable_devices")
+                R.id.atomizers -> navigateWithId(R.id.itemsReviewFragment,"atomizers")
+                R.id.cartridgeAndCoils -> navigateWithId(R.id.itemsReviewFragment,"cartridges_and_coils")
+                R.id.regularLiquids -> navigateWithId(R.id.itemsReviewFragment,"regular_liquids")
+                R.id.saltNicotineLiquids -> navigateWithId(R.id.itemsReviewFragment,"salt_nicotine_liquids")
+            }
+            true
+        }
+    }
 
     private fun setViewModelObserver(){
         viewModel.selectedItemLiveData.observe(this){
@@ -76,6 +92,15 @@ class MainActivity : AppCompatActivity(), Navigator {
                 toolBar.visibility = View.GONE
             }
         }
+    }
+
+    private fun navigateWithId(id: Int, query: String){
+        navController.navigate(
+            id,
+            bundleOf("query" to query)
+            ,navOptions { popUpTo(id){inclusive = true} }
+        )
+        binding.drawerLayout.closeDrawers()
     }
 
     private fun navControllerInitializer(){
