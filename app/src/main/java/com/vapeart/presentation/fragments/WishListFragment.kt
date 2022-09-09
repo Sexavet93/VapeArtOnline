@@ -1,6 +1,7 @@
 package com.vapeart.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +53,7 @@ class WishListFragment : ItemsManagerImpl() {
     }
     override fun addToCart(item: SelectedItem) {
         viewModel.addSelectedItem(item)
-        showToast(getString(R.string.warning))
+        showToast(getString(R.string.item_added_to_cart))
     }
 
     override fun deleteItem(item: FavoriteItem) {

@@ -1,6 +1,7 @@
 package com.vapeart.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,7 @@ class CartFragment : ItemsManagerImpl() {
                     bottomButtons.visibility = View.GONE
                 }
             }
+            Log.d("mylog",it.toString())
             adapter.submitList(it)
         }
     }

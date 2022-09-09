@@ -34,7 +34,6 @@ class ItemsReviewAdapter(@JvmField var itemList: List<Item>,val navigator: Navig
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     progressBar.visibility = View.GONE
                     itemImageView.setImageBitmap(resource)
-                    holder.setClickListener(item,resource)
                 }
             })
             categoryNameTextView.text = item.category
@@ -45,6 +44,7 @@ class ItemsReviewAdapter(@JvmField var itemList: List<Item>,val navigator: Navig
             }
             currentPriceTextView.text = item.currentPrice
         }
+        holder.setClickListener(item)
     }
 
     override fun getItemCount() = itemList.size
@@ -58,12 +58,12 @@ class ItemsReviewAdapter(@JvmField var itemList: List<Item>,val navigator: Navig
 
         val binding: ItemReviewLayoutBinding = ItemReviewLayoutBinding.bind(view)
 
-        fun setClickListener(item: Item,image: Bitmap){
+        fun setClickListener(item: Item){
             binding.root.setOnClickListener{
                 navigator
                     .navigate(
                         ItemsReviewFragmentDirections
-                            .actionItemsReviewFragmentToDetailsFragment(item,image))
+                            .actionItemsReviewFragmentToDetailsFragment(item))
             }
         }
 

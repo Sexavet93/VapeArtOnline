@@ -35,7 +35,6 @@ class MainAdapter(private val navigator: Navigator):
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     progressBar.visibility = View.GONE
                     itemImage.setImageBitmap(resource)
-                    holder.setOnClickListener(item,resource)
                 }
             })
             nameTextView.text = item.name
@@ -45,6 +44,7 @@ class MainAdapter(private val navigator: Navigator):
                 oldPriceTextView.text = item.oldPrice
             }
         }
+        holder.setOnClickListener(item)
     }
 
     override fun onViewRecycled(holder: MainViewHolder) {
@@ -56,11 +56,11 @@ class MainAdapter(private val navigator: Navigator):
         val binding: MainAdapterItemLayoutBinding = MainAdapterItemLayoutBinding.bind(view)
         var isOnClickListenerSet: Boolean = false
 
-        fun setOnClickListener(item: Item, photo: Bitmap){
+        fun setOnClickListener(item: Item){
             if(!isOnClickListenerSet){
                 isOnClickListenerSet = true
                 binding.root.setOnClickListener{
-                    navigator.navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item,photo))
+                    navigator.navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item))
                 }
             }
         }

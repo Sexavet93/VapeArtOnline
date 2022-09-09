@@ -92,9 +92,6 @@
         <argument
             android:name="item"
             app:argType="com.vapeart.domain.Item" />
-        <argument
-            android:name="image"
-            app:argType="android.graphics.Bitmap" />
     </fragment>
     <fragment
         android:id="@+id/itemsReviewFragment"
