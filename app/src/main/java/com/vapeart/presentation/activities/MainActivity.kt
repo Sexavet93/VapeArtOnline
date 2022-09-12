@@ -1,5 +1,7 @@
 package com.vapeart.presentation.activities
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -26,9 +28,10 @@ class MainActivity : AppCompatActivity(), Navigator {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var navController: NavController
+    private lateinit var popupMenu: PopupMenu
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        setTheme(R.style.Theme_VapeArt)
+        setTheme(R.style.Theme_VapeArt)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,10 +41,31 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     override fun onStart() {
         super.onStart()
-        setToolBarMenuButton()
-        setToolBarDropdownMenu()
+        initializePopUpMenu()
         setNavigationMenu()
         setViewModelObserver()
+        setToolbarButtonsListeners()
+    }
+
+    private fun setToolbarButtonsListeners(){
+        binding.menu.setOnClickListener{
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        binding.dropdownMenu.setOnClickListener {
+            popupMenu.show()
+        }
+
+        binding.call.setOnClickListener{
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+994704030313"))
+            startActivity(intent)
+        }
+
+        binding.cart.setOnClickListener{
+            if(navController.currentDestination?.id != R.id.cartFragment){
+                navController.navigate(R.id.cartFragment,null,navOptions { popUpTo(R.id.cartFragment){inclusive = true} })
+            }
+        }
     }
 
     private fun setNavigationMenu(){
@@ -109,8 +133,8 @@ class MainActivity : AppCompatActivity(), Navigator {
         binding.bottomNavigation.setupWithNavController(navController)
     }
 
-    private fun setToolBarDropdownMenu(){
-        val popupMenu = PopupMenu(this, binding.dropdownMenu)
+    private fun initializePopUpMenu(){
+        popupMenu = PopupMenu(this, binding.dropdownMenu)
         popupMenu.menu.add(SIGN_OUT_BUTTON)
         popupMenu.setOnMenuItemClickListener {
             when(it.toString()){
@@ -121,15 +145,6 @@ class MainActivity : AppCompatActivity(), Navigator {
                 }
             }
             return@setOnMenuItemClickListener true
-        }
-        binding.dropdownMenu.setOnClickListener {
-            popupMenu.show()
-        }
-    }
-
-    private fun setToolBarMenuButton(){
-        binding.menu.setOnClickListener{
-            binding.drawerLayout.openDrawer(GravityCompat.START)
         }
     }
 

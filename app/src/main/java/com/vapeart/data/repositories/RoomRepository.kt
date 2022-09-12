@@ -49,6 +49,10 @@ class RoomRepository private constructor(context: Context) {
         coroutineScope.launch { dao.deleteFavoriteItem(item) }
     }
 
+    fun deleteTable(){
+        coroutineScope.launch { dao.deleteTable()}
+    }
+
     companion object{
         private var INSTANCE: RoomRepository? = null
 

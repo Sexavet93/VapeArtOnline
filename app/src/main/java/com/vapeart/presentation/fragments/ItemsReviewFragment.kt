@@ -46,7 +46,7 @@ class ItemsReviewFragment : Fragment() {
     private fun setViewModelObserver(){
         viewModel.queryLiveData.observe(viewLifecycleOwner){
             if(it.isNotEmpty()){
-                adapter.setItemList(it)
+                adapter.setList(it)
                 binding.defaultTextView.visibility = View.GONE
             } else {
                 binding.defaultTextView.visibility = View.VISIBLE
@@ -60,7 +60,6 @@ class ItemsReviewFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(),2)
             adapter = this@ItemsReviewFragment.adapter
         }
-
     }
 
     override fun onDestroy() {

@@ -17,4 +17,8 @@ class CartFragmentViewModel: ViewModel() {
     fun addSelectedItem(item: SelectedItem){
         roomRepository.addSelectedItem(item)
     }
+
+    fun deleteAllItems(){
+        roomRepository.deleteTable()
+    }
 }

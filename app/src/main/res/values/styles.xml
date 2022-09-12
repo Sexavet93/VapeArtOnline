@@ -65,6 +65,12 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
 
+    <style name="default_text_style">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

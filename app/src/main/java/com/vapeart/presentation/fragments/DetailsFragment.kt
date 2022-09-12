@@ -157,10 +157,10 @@ class DetailsFragment : Fragment() {
         Toast.makeText(requireContext(), expression, Toast.LENGTH_SHORT).show()
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     private fun setFavoriteButtonTextAndImage(){
         binding.apply {

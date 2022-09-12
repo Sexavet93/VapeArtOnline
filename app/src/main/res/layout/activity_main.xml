@@ -35,7 +35,7 @@
                 android:src="@drawable/logo" />
 
             <ImageView
-                android:id="@+id/phone"
+                android:id="@+id/call"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="30dp"

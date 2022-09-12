@@ -4,7 +4,7 @@
     package="com.vapeart">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <queries> <package android:name="com.whatsapp" /> </queries>
+    <queries> <package android:name="com.whatsapp"/> </queries>
 
     <application
         android:name=".presentation.MyApplication"
@@ -15,12 +15,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.VapeArt"
+        android:theme="@style/splashScreenTheme"
         tools:targetApi="31">
         <activity
             android:name=".presentation.activities.MainActivity"
             android:screenOrientation="locked"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

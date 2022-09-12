@@ -1,7 +1,6 @@
 package com.vapeart.data.room
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 @Dao
@@ -15,6 +14,9 @@ interface RoomDao {
 
     @Query("SELECT * FROM selecteditem WHERE id=(:id)")
     fun getSelectedItem(id: String): LiveData<SelectedItem>
+
+    @Query("DELETE FROM selecteditem")
+    suspend fun deleteTable()
 
     @Query("SELECT * FROM favoriteitem WHERE id=(:id)")
     fun getFavoriteItem(id: String): LiveData<FavoriteItem>
