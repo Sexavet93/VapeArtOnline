@@ -1,14 +1,13 @@
 package com.vapeart.data.repositories
 
 import com.google.firebase.auth.FirebaseAuth
-import com.vapeart.data.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignInRepository private constructor() {
+class SignInRepository @Inject constructor(private var firebaseAuth: FirebaseAuth) {
 
-    private val firebaseAuth: FirebaseAuth = Firebase.getInstance().firebaseAuth
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
     fun isUserRegistered(): Boolean{
@@ -21,15 +20,6 @@ class SignInRepository private constructor() {
                 .addOnCompleteListener { task ->
                     callback.invoke(task.isSuccessful)
                 }
-        }
-    }
-
-    companion object{
-        private var INSTANCE: SignInRepository? = null
-
-        fun getInstance(): SignInRepository{
-            if(INSTANCE == null) INSTANCE = SignInRepository()
-            INSTANCE?.let { return it } ?: throw RuntimeException("INSTANCE is null")
         }
     }
 }

@@ -3,15 +3,17 @@ package com.vapeart.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.vapeart.data.Firebase
 import com.vapeart.data.repositories.RoomRepository
 import com.vapeart.data.repositories.SignInRepository
 import com.vapeart.data.room.SelectedItem
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainActivityViewModel: ViewModel() {
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(roomRepo: RoomRepository, ): ViewModel() {
 
-    private val firebaseAuthRepo: SignInRepository = SignInRepository.getInstance()
-    private val roomRepo: RoomRepository = RoomRepository.getInstance()
+    @Inject lateinit var firebaseAuth: FirebaseAuth
+    @Inject lateinit var firebaseAuthRepo: SignInRepository
     val selectedItemLiveData: LiveData<List<SelectedItem>> = roomRepo.getSelectedItems()
 
     fun isUserRegistered(): Boolean{
@@ -19,7 +21,6 @@ class MainActivityViewModel: ViewModel() {
     }
 
     fun signOut(){
-        val firebaseAuth: FirebaseAuth = Firebase.getInstance().firebaseAuth
         firebaseAuth.signOut()
     }
 }

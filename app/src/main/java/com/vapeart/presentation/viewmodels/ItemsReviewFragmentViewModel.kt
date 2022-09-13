@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vapeart.data.repositories.FirestoreRepository
 import com.vapeart.domain.Item
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ItemsReviewFragmentViewModel : ViewModel() {
+@HiltViewModel
+class ItemsReviewFragmentViewModel @Inject constructor(private var firebaseRepo: FirestoreRepository): ViewModel() {
 
-    val firebaseRepo: FirestoreRepository = FirestoreRepository.getInstance()
     private var _queryLiveData: MutableLiveData<List<Item>> = MutableLiveData()
     val queryLiveData: LiveData<List<Item>>
         get() = _queryLiveData
