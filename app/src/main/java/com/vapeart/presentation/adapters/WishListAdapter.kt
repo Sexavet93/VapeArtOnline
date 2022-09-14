@@ -24,8 +24,9 @@ class WishListAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishListAdapter.WishListHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.wish_list_item_layout, parent, false)
-        return WishListHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = WishListItemLayoutBinding.inflate(inflater,parent,false)
+        return WishListHolder(binding)
     }
 
     override fun onBindViewHolder(holder: WishListAdapter.WishListHolder, position: Int) {
@@ -51,8 +52,8 @@ class WishListAdapter(
         holder.binding.progressBar.visibility = View.VISIBLE
     }
 
-    inner class WishListHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding: WishListItemLayoutBinding = WishListItemLayoutBinding.bind(view)
+    inner class WishListHolder(val binding: WishListItemLayoutBinding):
+        RecyclerView.ViewHolder(binding.root) {
 
         fun setOnAddToCartButtonListener(item: FavoriteItem) {
             binding.addToCartButton.setOnClickListener {

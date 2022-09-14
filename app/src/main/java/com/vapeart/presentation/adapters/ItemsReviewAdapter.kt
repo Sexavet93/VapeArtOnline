@@ -25,9 +25,9 @@ class ItemsReviewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_review_layout, parent, false)
-        return  ItemsViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemReviewLayoutBinding.inflate(inflater,parent,false)
+        return  ItemsViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
@@ -61,7 +61,6 @@ class ItemsReviewAdapter(
     }
 
 
-    inner class ItemsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding: ItemReviewLayoutBinding = ItemReviewLayoutBinding.bind(view)
-    }
+    inner class ItemsViewHolder(val binding: ItemReviewLayoutBinding)
+        : RecyclerView.ViewHolder(binding.root)
 }

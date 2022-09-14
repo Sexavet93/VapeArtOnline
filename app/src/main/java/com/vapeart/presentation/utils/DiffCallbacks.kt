@@ -35,7 +35,7 @@ object DiffCallbacks {
         }
 
         override fun areContentsTheSame(oldItem: SelectedItem, newItem: SelectedItem): Boolean {
-            return true
+            return oldItem == newItem
         }
     }
 

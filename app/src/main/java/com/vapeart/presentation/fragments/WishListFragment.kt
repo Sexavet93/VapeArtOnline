@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vapeart.R
 import com.vapeart.data.room.FavoriteItem
@@ -15,13 +16,15 @@ import com.vapeart.databinding.FragmentWishListBinding
 import com.vapeart.presentation.adapters.WishListAdapter
 import com.vapeart.presentation.utils.ItemsManagerImpl
 import com.vapeart.presentation.viewmodels.WishListFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WishListFragment : Fragment() {
 
     private var _binding: FragmentWishListBinding? = null
     private val binding: FragmentWishListBinding
         get() = _binding ?: throw RuntimeException("WishListFragment binding is null")
-    private val viewModel: WishListFragmentViewModel by activityViewModels()
+    private val viewModel: WishListFragmentViewModel by viewModels()
     private lateinit var adapter: WishListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vapeart.databinding.FragmentHomeBinding
@@ -16,9 +17,11 @@ import com.vapeart.presentation.adapters.ViewPagerAdapter
 import com.vapeart.presentation.utils.Assistant
 import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.viewmodels.HomeFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val DELAY = 3500L
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var navigator: Navigator
@@ -27,7 +30,7 @@ class HomeFragment : Fragment() {
     private lateinit var adapterForBestSellersRv: MainAdapter
     private lateinit var adapterForNewItemRv: MainAdapter
     private lateinit var adapterForDiscountsRv: MainAdapter
-    private val viewModel: HomeFragmentViewModel by activityViewModels()
+    private val viewModel: HomeFragmentViewModel by viewModels()
     private val handler = Handler(Looper.getMainLooper())
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
@@ -75,12 +78,15 @@ class HomeFragment : Fragment() {
     private fun setViewModelObservers(){
         viewModel.bestSellersResponseLiveData.observe(viewLifecycleOwner){
             adapterForBestSellersRv.submitList(it)
+            progressBarVisibility()
         }
         viewModel.newItemsResponseLiveData.observe(viewLifecycleOwner){
             adapterForNewItemRv.submitList(it)
+            progressBarVisibility()
         }
         viewModel.discountsResponseLiveData.observe(viewLifecycleOwner){
             adapterForDiscountsRv.submitList(it)
+            progressBarVisibility()
         }
     }
 
@@ -94,9 +100,18 @@ class HomeFragment : Fragment() {
         handler.postDelayed(viewPagerTask, DELAY)
     }
 
+    private fun progressBarVisibility(){
+        binding.progressBar.apply {
+            if(visibility == View.VISIBLE){
+                visibility = View.GONE
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         handler.removeCallbacks(viewPagerTask)
         _binding = null
     }
+
 }

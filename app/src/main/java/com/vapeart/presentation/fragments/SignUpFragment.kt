@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignUpBinding
 import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.utils.TextWatcherImpl
 import com.vapeart.presentation.viewmodels.SignUpFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private var _binding: FragmentSignUpBinding? = null
@@ -23,7 +25,7 @@ class SignUpFragment : Fragment() {
     private var password: String = ""
     private var confirmPassword: String = ""
     private val arguments: SignUpFragmentArgs by navArgs()
-    private val viewModel: SignUpFragmentViewModel by activityViewModels()
+    private val viewModel: SignUpFragmentViewModel by viewModels()
     private lateinit var navigator: Navigator
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -67,7 +67,8 @@
             app:popExitAnim="@anim/slide_out"/>
         <argument
             android:name="email"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue='' />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"

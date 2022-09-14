@@ -5,19 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vapeart.databinding.FragmentItemsReviewBinding
 import com.vapeart.presentation.adapters.ItemsReviewAdapter
 import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.viewmodels.ItemsReviewFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ItemsReviewFragment : Fragment() {
 
     private var _binding: FragmentItemsReviewBinding? = null
     private val binding: FragmentItemsReviewBinding
         get() = _binding ?: throw RuntimeException("ItemsReviewFragment binding is null")
-    private val viewModel: ItemsReviewFragmentViewModel by activityViewModels()
+    private val viewModel: ItemsReviewFragmentViewModel by viewModels()
     private lateinit var adapter: ItemsReviewAdapter
     private lateinit var query: String
     private lateinit var navigator: Navigator
