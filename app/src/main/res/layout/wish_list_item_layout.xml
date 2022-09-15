@@ -7,7 +7,7 @@
     android:layout_marginTop="10dp">
 
     <ImageView
-        android:id="@+id/brendImageView"
+        android:id="@+id/brandImageView"
         android:layout_width="100dp"
         android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +149,7 @@
             android:layout_height="25dp"
             android:layout_marginStart="10dp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_bag" />
+            android:background="@drawable/ic_cart" />
 
         <TextView
             style="@style/button_text_style1"

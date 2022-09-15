@@ -7,20 +7,21 @@
     tools:context=".presentation.fragments.DetailsFragment">
 
     <ImageView
-        android:id="@+id/brendImageView"
+        android:id="@+id/brandImageView"
         android:layout_width="100dp"
         android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        tools:src="@drawable/logo"/>
+        tools:src="@drawable/logo"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/categoryNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/brendImageView"
+        app:layout_constraintStart_toEndOf="@id/brandImageView"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="25dp"
         android:layout_marginStart="20dp"
@@ -30,7 +31,7 @@
         android:id="@+id/itemNameTextViewTop"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/brendImageView"
+        app:layout_constraintStart_toEndOf="@id/brandImageView"
         app:layout_constraintTop_toBottomOf="@id/categoryNameTextView"
         android:layout_marginTop="3dp"
         android:layout_marginStart="20dp"
@@ -44,7 +45,7 @@
         app:layout_constraintBottom_toTopOf="@+id/addToCartButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/brendImageView"
+        app:layout_constraintTop_toBottomOf="@id/brandImageView"
         android:layout_marginBottom="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,7 +71,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/itemImageView"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:contentDescription="@string/favorite_button_text_false"/>
 
             <TextView
                 android:id="@+id/addToFavoriteTextView"
@@ -80,7 +82,8 @@
                 app:layout_constraintEnd_toEndOf="@id/addToFavoritesButton"
                 app:layout_constraintTop_toBottomOf="@id/addToFavoritesButton"
                 android:textSize="10sp"
-                tools:text="add to favorites"/>
+                tools:text="add to favorites"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/itemNameTextView"
@@ -197,7 +200,7 @@
             android:layout_marginStart="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="0" />
+            android:text="@string/default_calculator_value" />
 
         <ImageButton
             android:id="@+id/appendItemButton"
@@ -209,7 +212,8 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:background="@drawable/ic_add"
-            style="@style/clickable_button_style"/>
+            style="@style/clickable_button_style"
+            android:contentDescription="@string/increase_items_quantity"/>
 
         <ImageButton
             android:id="@+id/removeItemButton"
@@ -221,7 +225,8 @@
             android:textSize="35sp"
             android:textStyle="bold"
             android:background="@drawable/ic_remove"
-            style="@style/clickable_button_style"/>
+            style="@style/clickable_button_style"
+            android:contentDescription="@string/reduce_items_quantity"/>
 
     </LinearLayout>
 
@@ -240,10 +245,12 @@
         style="@style/clickable_button_style">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginStart="10dp"
-            android:background="@drawable/ic_bag" />
+            android:background="@drawable/ic_cart"
+            android:layout_gravity="bottom"
+            tools:ignore="ContentDescription" />
 
         <TextView
             style="@style/button_text_style1"
@@ -273,7 +280,8 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginStart="50dp"
-            android:background="@drawable/whatsapp" />
+            android:background="@drawable/whatsapp"
+            tools:ignore="ContentDescription" />
 
         <TextView
             style="@style/button_text_style1"

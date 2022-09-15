@@ -79,7 +79,7 @@ class DetailsFragment : Fragment() {
         binding.apply {
             categoryNameTextView.text = item.category
             itemNameTextViewTop.text = item.name
-            brendImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
+            brandImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
             Glide.with(root).load(item.imageUri).into(itemImageView)
             itemNameTextView.text = item.name
             currentPriceTextView.text = item.currentPrice

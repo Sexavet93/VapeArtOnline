@@ -34,7 +34,7 @@ class CartAdapter(private val itemsManager: ItemsManager)
                     itemImageView.setImageBitmap(resource)
                 }
             })
-            brendImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
+            brandImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
             itemNameTextView.text = item.itemName
             itemAmountTextView.text = item.amount.toString()
             val totalPrice: Double = try {

@@ -38,7 +38,7 @@ class WishListAdapter(
                         itemImageView.setImageBitmap(resource)
                     }
                 })
-            brendImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
+            brandImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
             itemNameTextView.text = item.itemName
             currentPriceTextView.text = item.currentPrice
         }

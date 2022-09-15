@@ -7,13 +7,14 @@
     android:layout_marginTop="10dp">
 
     <ImageView
-        android:id="@+id/brendImageView"
+        android:id="@+id/brandImageView"
         android:layout_width="100dp"
         android:layout_height="60dp"
         app:layout_constraintStart_toEndOf="@id/itemImageView"
         app:layout_constraintTop_toTopOf="@id/itemImageView"
         android:layout_marginEnd="100dp"
-        tools:src="@drawable/logo"/>
+        tools:src="@drawable/logo"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/itemImageView"
@@ -35,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"/>
+        app:layout_constraintHorizontal_bias="0.95"
+        android:contentDescription="@string/delete_item"/>
 
     <ImageView
         android:id="@+id/progressBar"
@@ -101,7 +103,7 @@
         android:layout_width="110dp"
         android:layout_height="30dp"
         app:layout_constraintStart_toEndOf="@id/itemImageView"
-        app:layout_constraintTop_toBottomOf="@id/brendImageView"
+        app:layout_constraintTop_toBottomOf="@id/brandImageView"
         android:layout_marginTop="120dp"
         android:background="@drawable/rounded_corners"
         android:layout_marginStart="10dp">
@@ -114,7 +116,7 @@
             android:layout_marginStart="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="0" />
+            android:text="@string/default_calculator_value" />
 
         <ImageButton
             android:id="@+id/appendItemButton"

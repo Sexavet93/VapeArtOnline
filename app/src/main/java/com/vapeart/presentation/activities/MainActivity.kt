@@ -41,6 +41,7 @@ class MainActivity: AppCompatActivity(), Navigator {
         setContentView(binding.root)
         navControllerInitializer()
         checkRegisteredUser()
+        setBottomNavigationListener()
     }
 
     override fun onStart() {
@@ -49,6 +50,30 @@ class MainActivity: AppCompatActivity(), Navigator {
         setNavigationMenu()
         setViewModelObserver()
         setToolbarButtonsListeners()
+    }
+
+    private fun setBottomNavigationListener(){
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.homeFragment -> {
+                    if(navController.currentDestination?.id != R.id.homeFragment)
+                        navigateWithId(R.id.homeFragment)
+                }
+                R.id.wishListFragment -> {
+                    if(navController.currentDestination?.id != R.id.wishListFragment)
+                        navigateWithId(R.id.wishListFragment)
+                }
+                R.id.cartFragment -> {
+                    if(navController.currentDestination?.id != R.id.cartFragment)
+                        navigateWithId(R.id.cartFragment)
+                }
+                R.id.searchFragment -> {
+                    if(navController.currentDestination?.id != R.id.searchFragment)
+                        navigateWithId(R.id.searchFragment)
+                }
+            }
+            true
+        }
     }
 
     private fun setToolbarButtonsListeners() {
@@ -98,6 +123,22 @@ class MainActivity: AppCompatActivity(), Navigator {
         }
     }
 
+    private fun navigateWithId(id: Int, query: String) {
+        val popUpToId = navController.currentDestination?.id ?: 0
+        navController.navigate(id, bundleOf("query" to query))
+        binding.drawerLayout.closeDrawers()
+    }
+
+    private fun navigateWithId(id: Int) {
+        val popUpToId = navController.currentDestination?.id ?: 0
+        navController.navigate(
+            id,
+            null,
+            navOptions { popUpTo(popUpToId) { inclusive = true } }
+        )
+        binding.drawerLayout.closeDrawers()
+    }
+
     private fun setViewModelObserver() {
         viewModel.selectedItemLiveData.observe(this) {
             setSelectedItemCount(it)
@@ -133,14 +174,6 @@ class MainActivity: AppCompatActivity(), Navigator {
         }
     }
 
-    private fun navigateWithId(id: Int, query: String) {
-        navController.navigate(
-            id,
-            bundleOf("query" to query), navOptions { popUpTo(id) { inclusive = true } }
-        )
-        binding.drawerLayout.closeDrawers()
-    }
-
     private fun navControllerInitializer() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHost
         navController = navHost.navController
@@ -163,9 +196,6 @@ class MainActivity: AppCompatActivity(), Navigator {
 
     private fun setSelectedItemCount(list: List<SelectedItem>) {
         if (list.isNotEmpty()) {
-            var count = 0
-            list.forEach { count += it.amount }
-            binding.selectedItemCount.text = count.toString()
             binding.selectedItemCount.visibility = View.VISIBLE
         } else {
             binding.selectedItemCount.visibility = View.GONE
