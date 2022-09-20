@@ -1,11 +1,11 @@
 package com.vapeart.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vapeart.R
@@ -16,7 +16,7 @@ import com.vapeart.presentation.adapters.WishListAdapter
 import com.vapeart.presentation.utils.ItemsManagerImpl
 import com.vapeart.presentation.viewmodels.WishListFragmentViewModel
 
-class WishListFragment : ItemsManagerImpl() {
+class WishListFragment : Fragment() {
 
     private var _binding: FragmentWishListBinding? = null
     private val binding: FragmentWishListBinding
@@ -31,7 +31,16 @@ class WishListFragment : ItemsManagerImpl() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = WishListAdapter(this)
+        adapter = WishListAdapter(object : ItemsManagerImpl(){
+            override fun addToCart(item: SelectedItem) {
+                viewModel.addSelectedItem(item)
+                showToast(getString(R.string.item_added_to_cart))
+            }
+            override fun deleteItem(item: FavoriteItem) {
+                viewModel.deleteFavoriteItem(item)
+                showToast(getString(R.string.delete_favorite_item))
+            }
+        })
         viewModel.favoriteItemsLiveData.observe(viewLifecycleOwner){
             adapter.submitList(it)
             setDefaultTextView(it.isEmpty())
@@ -50,15 +59,6 @@ class WishListFragment : ItemsManagerImpl() {
         } else {
             binding.defaultTextView.visibility = View.VISIBLE
         }
-    }
-    override fun addToCart(item: SelectedItem) {
-        viewModel.addSelectedItem(item)
-        showToast(getString(R.string.item_added_to_cart))
-    }
-
-    override fun deleteItem(item: FavoriteItem) {
-        viewModel.deleteFavoriteItem(item)
-        showToast(getString(R.string.delete_favorite_item))
     }
 
     private fun showToast(expression: String){

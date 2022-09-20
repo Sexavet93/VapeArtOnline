@@ -12,10 +12,6 @@ import kotlinx.coroutines.launch
 class FirestoreRepository private constructor() {
 
     private val firebaseCloud: FirebaseFirestore = Firebase.getInstance().firebaseCloud
-    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
-    private val bestSellersLiveData: MutableLiveData<List<Item>> = MutableLiveData()
-    private val newItemLiveData: MutableLiveData<List<Item>> = MutableLiveData()
-    private val discountsLiveData: MutableLiveData<List<Item>> = MutableLiveData()
     private val referencesList = listOf(
         firebaseCloud.collection("devices"),
         firebaseCloud.collection("atomizers"),
@@ -24,15 +20,15 @@ class FirestoreRepository private constructor() {
         firebaseCloud.collection("regular_liquids"),
         firebaseCloud.collection("salt_nicotine_liquids")
     )
+    private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    val bestSellersLiveData: MutableLiveData<List<Item>> = getBestSellers()
+    val newItemLiveData: MutableLiveData<List<Item>> = getNewItems()
+    val discountsLiveData: MutableLiveData<List<Item>> = getDiscounts()
 
-    init {
-        getBestSellers()
-        getNewItems()
-        getDiscounts()
-    }
 
-    private fun getBestSellers() {
+    private fun getBestSellers(): MutableLiveData<List<Item>> {
         val bestSellersList: MutableList<Item> = mutableListOf()
+        val liveData = MutableLiveData<List<Item>>()
         for (reference in referencesList) {
             coroutineScope.launch {
                 reference.whereGreaterThan("saleQuantityPerMonth", 7).get()
@@ -43,16 +39,18 @@ class FirestoreRepository private constructor() {
                                 myItem.id = item.id
                                 myItem.description = myItem.description.replace("\\n", "\n")
                                 bestSellersList.add(myItem)
-                                bestSellersLiveData.postValue(bestSellersList)
+                                liveData.postValue(bestSellersList)
                             }
                         }
                     }
             }
         }
+        return liveData
     }
 
-    private fun getNewItems() {
+    private fun getNewItems(): MutableLiveData<List<Item>> {
         val newItemList: MutableList<Item> = mutableListOf()
+        val liveData = MutableLiveData<List<Item>>()
         for (reference in referencesList) {
             coroutineScope.launch {
                 reference.whereEqualTo("itemNew", true).get().addOnCompleteListener { task ->
@@ -62,16 +60,18 @@ class FirestoreRepository private constructor() {
                             myItem.id = item.id
                             myItem.description = myItem.description.replace("\\n", "\n")
                             newItemList.add(myItem)
-                            newItemLiveData.postValue(newItemList)
+                            liveData.postValue(newItemList)
                         }
                     }
                 }
             }
         }
+        return liveData
     }
 
-    private fun getDiscounts() {
+    private fun getDiscounts(): MutableLiveData<List<Item>> {
         val discountsList: MutableList<Item> = mutableListOf()
+        val liveData = MutableLiveData<List<Item>>()
         for (reference in referencesList) {
             coroutineScope.launch {
                 reference.whereNotEqualTo("oldPrice", "0").get().addOnCompleteListener { task ->
@@ -81,12 +81,13 @@ class FirestoreRepository private constructor() {
                             myItem.id = item.id
                             myItem.description = myItem.description.replace("\\n", "\n")
                             discountsList.add(myItem)
-                            discountsLiveData.postValue(discountsList)
+                            liveData.postValue(discountsList)
                         }
                     }
                 }
             }
         }
+        return liveData
     }
 
     fun getQueryItemsList(query: String): MutableLiveData<List<Item>>{
@@ -98,6 +99,7 @@ class FirestoreRepository private constructor() {
                     task.result.forEach {
                         val item = it.toObject(Item::class.java)
                         item.id = it.id
+                        item.description = item.description.replace("\\n", "\n")
                         itemList.add(item)
                         queryLiveData.postValue(itemList)
                     }
@@ -107,17 +109,7 @@ class FirestoreRepository private constructor() {
         return queryLiveData
     }
 
-    fun getBestSellersLiveData(): LiveData<List<Item>>{
-        return bestSellersLiveData
-    }
-
-    fun getNewItemList(): LiveData<List<Item>>{
-        return newItemLiveData
-    }
-
-    fun getDiscountsList(): LiveData<List<Item>>{
-        return discountsLiveData
-    }
+    fun getReferencesList() = referencesList
 
     companion object {
         private var INSTANCE: FirestoreRepository? = null

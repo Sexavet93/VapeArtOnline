@@ -43,8 +43,11 @@
     <string name="favorite_button_text_false">"add to wish list"</string>
     <string name="your_wish_list_is_empty">Your wish list is empty</string>
     <string name="your_cart_list_is_empty">Your cart is empty</string>
+    <string name="search_did_not_give_any_results">Search didn\'t give any results</string>
     <string name="category_empty">There is no items in this category</string>
     <string name="delete_all_items">Delete all items</string>
     <string name="add_item">Add item</string>
     <string name="delete_item">Delete item</string>
+    <string name="delete_all_items_from_cart_dialog_message">Are you sure you want to delete all items?</string>
+    <string name="total_price">Total price</string>
 </resources>

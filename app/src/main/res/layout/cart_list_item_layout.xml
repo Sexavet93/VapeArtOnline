@@ -68,7 +68,7 @@
         style="@style/text_style1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/addToCartCalculator"
+        app:layout_constraintBottom_toTopOf="@id/totalPriceTextView"
         app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="@+id/addToCartCalculator"
         android:layout_marginStart="10dp"
@@ -83,9 +83,18 @@
         android:text="@string/azn"
         android:textColor="@color/my_orange"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/addToCartCalculator"
+        app:layout_constraintBottom_toTopOf="@id/totalPriceTextView"
         app:layout_constraintStart_toEndOf="@+id/currentPriceTextView"
         app:layout_goneMarginEnd="10dp" />
+
+    <TextView
+        android:id="@+id/totalPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/currentPriceTextView"
+        app:layout_constraintEnd_toEndOf="@id/currencyTextView2"
+        app:layout_constraintBottom_toTopOf="@id/addToCartCalculator"
+        android:text="@string/total_price"/>
 
     <LinearLayout
         android:id="@+id/addToCartCalculator"
@@ -93,7 +102,7 @@
         android:layout_height="30dp"
         app:layout_constraintStart_toEndOf="@id/itemImageView"
         app:layout_constraintTop_toBottomOf="@id/brendImageView"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/rounded_corners"
         android:layout_marginStart="10dp">
 
