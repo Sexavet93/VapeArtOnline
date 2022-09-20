@@ -1,17 +1,15 @@
 package com.vapeart.data.repositories
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.vapeart.data.Firebase
 import com.vapeart.domain.Item
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FirestoreRepository private constructor() {
+class FirestoreRepository @Inject constructor(private var firebaseCloud: FirebaseFirestore) {
 
-    private val firebaseCloud: FirebaseFirestore = Firebase.getInstance().firebaseCloud
     private val referencesList = listOf(
         firebaseCloud.collection("devices"),
         firebaseCloud.collection("atomizers"),
@@ -110,16 +108,4 @@ class FirestoreRepository private constructor() {
     }
 
     fun getReferencesList() = referencesList
-
-    companion object {
-        private var INSTANCE: FirestoreRepository? = null
-
-        fun getInstance(): FirestoreRepository {
-            if (INSTANCE == null)
-                INSTANCE = FirestoreRepository()
-            INSTANCE?.let {
-                return it
-            } ?: throw RuntimeException("INSTANCE is null")
-        }
-    }
 }

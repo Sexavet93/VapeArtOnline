@@ -7,11 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vapeart.databinding.FragmentSearchBinding
 import com.vapeart.domain.Item
-import com.vapeart.presentation.adapters.ItemsReviewAdapter
 import com.vapeart.presentation.adapters.SearchFragmentAdapter
 import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.utils.OnQueryTextListenerImpl
@@ -20,7 +19,7 @@ import com.vapeart.presentation.viewmodels.SearchFragmentViewModel
 
 class SearchFragment : Fragment() {
 
-    private val viewModel: SearchFragmentViewModel by viewModels()
+    private val viewModel: SearchFragmentViewModel by activityViewModels()
     private var _binding: FragmentSearchBinding? = null
     private val binding: FragmentSearchBinding
         get() = _binding ?: throw RuntimeException("SearchFragment binding is null")

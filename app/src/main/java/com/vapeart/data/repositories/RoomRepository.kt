@@ -6,15 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import com.vapeart.data.room.FavoriteItem
 import com.vapeart.data.room.RoomDB
+import com.vapeart.data.room.RoomDao
 import com.vapeart.data.room.SelectedItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RoomRepository private constructor(context: Context) {
+class RoomRepository @Inject constructor(private var dao:RoomDao) {
 
-    private val roomDB = RoomDB.getInstance(context)
-    private val dao = roomDB.getDao()
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
     fun getSelectedItems(): LiveData<List<SelectedItem>> {
@@ -51,17 +51,5 @@ class RoomRepository private constructor(context: Context) {
 
     fun deleteTable(){
         coroutineScope.launch { dao.deleteTable()}
-    }
-
-    companion object{
-        private var INSTANCE: RoomRepository? = null
-
-        fun initialize(context: Context){
-            if(INSTANCE == null) INSTANCE = RoomRepository(context)
-        }
-
-        fun getInstance(): RoomRepository{
-            INSTANCE?.let { return it } ?: throw RuntimeException("RoomRepository must be initialized")
-        }
     }
 }

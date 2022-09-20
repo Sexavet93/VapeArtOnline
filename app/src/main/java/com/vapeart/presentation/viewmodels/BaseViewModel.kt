@@ -3,9 +3,11 @@ package com.vapeart.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.regex.Pattern
+import javax.inject.Inject
 
-abstract class BaseViewModel: ViewModel() {
+abstract class BaseViewModel (): ViewModel() {
 
     protected val _isSuccess: MutableLiveData<Boolean> = MutableLiveData()
     val isSuccess: LiveData<Boolean>

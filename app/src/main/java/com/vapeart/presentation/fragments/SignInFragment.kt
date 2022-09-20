@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignInBinding
@@ -23,7 +23,7 @@ class SignInFragment : Fragment() {
     private lateinit var email: String
     private var password: String = ""
     private val arguments: SignInFragmentArgs by navArgs()
-    private val viewModel: SignInFragmentViewModel by viewModels()
+    private val viewModel: SignInFragmentViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

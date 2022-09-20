@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.vapeart.data.repositories.RoomRepository
 import com.vapeart.data.room.SelectedItem
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CartFragmentViewModel: ViewModel() {
+@HiltViewModel
+class CartFragmentViewModel @Inject constructor(private var roomRepository: RoomRepository): ViewModel() {
 
-    private val roomRepository: RoomRepository = RoomRepository.getInstance()
     val selectedItemsLiveData: LiveData<List<SelectedItem>> = roomRepository.getSelectedItems()
 
     fun deleteSelectedItem(item: SelectedItem){

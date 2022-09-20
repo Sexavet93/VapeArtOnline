@@ -17,13 +17,15 @@ import androidx.navigation.ui.setupWithNavController
 import com.vapeart.R
 import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.ActivityMainBinding
-import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.fragments.HomeFragmentDirections
+import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.viewmodels.MainActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val SIGN_OUT_BUTTON = "Sign Out"
 
-class MainActivity : AppCompatActivity(), Navigator {
+@AndroidEntryPoint
+class MainActivity: AppCompatActivity(), Navigator {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainActivityViewModel by viewModels()

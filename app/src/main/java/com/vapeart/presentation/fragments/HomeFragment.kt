@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vapeart.databinding.FragmentHomeBinding
-import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.adapters.MainAdapter
 import com.vapeart.presentation.adapters.ViewPagerAdapter
 import com.vapeart.presentation.utils.Assistant
+import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.viewmodels.HomeFragmentViewModel
 
 private const val DELAY = 3500L
@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var adapterForBestSellersRv: MainAdapter
     private lateinit var adapterForNewItemRv: MainAdapter
     private lateinit var adapterForDiscountsRv: MainAdapter
-    private val viewModel: HomeFragmentViewModel by viewModels()
+    private val viewModel: HomeFragmentViewModel by activityViewModels()
     private val handler = Handler(Looper.getMainLooper())
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding

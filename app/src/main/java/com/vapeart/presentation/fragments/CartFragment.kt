@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vapeart.R
 import com.vapeart.data.room.SelectedItem
@@ -24,7 +24,7 @@ class CartFragment : Fragment() {
     private var _binding: FragmentCartBinding? = null
     private val binding: FragmentCartBinding
         get() = _binding ?: throw RuntimeException("CartFragment binding is bull")
-    private val viewModel: CartFragmentViewModel by viewModels()
+    private val viewModel: CartFragmentViewModel by activityViewModels()
     private lateinit var adapter: CartAdapter
     private var itemsList: List<SelectedItem> = emptyList()
 
@@ -45,7 +45,6 @@ class CartFragment : Fragment() {
             override fun addToCart(item: SelectedItem) {
                 viewModel.addSelectedItem(item)
             }
-
             override fun deleteFromCart(item: SelectedItem) {
                 viewModel.deleteSelectedItem(item)
             }

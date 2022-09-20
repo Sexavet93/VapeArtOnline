@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.vapeart.data.repositories.RoomRepository
 import com.vapeart.data.room.FavoriteItem
 import com.vapeart.data.room.SelectedItem
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class WishListFragmentViewModel: ViewModel() {
+@HiltViewModel
+class WishListFragmentViewModel @Inject constructor(private var roomRepo: RoomRepository): ViewModel() {
 
-    val roomRepo: RoomRepository  = RoomRepository.getInstance()
     val favoriteItemsLiveData: LiveData<List<FavoriteItem>> = roomRepo.getFavoriteItems()
 
     fun addSelectedItem(item: SelectedItem){

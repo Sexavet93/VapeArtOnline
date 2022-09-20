@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vapeart.R
 import com.vapeart.data.repositories.SignInRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.regex.Pattern
+import javax.inject.Inject
 
-class SignInFragmentViewModel : BaseViewModel() {
-
-
-    private val firebaseAuthRepo: SignInRepository = SignInRepository.getInstance()
+@HiltViewModel
+class SignInFragmentViewModel @Inject constructor(private var firebaseAuthRepo: SignInRepository) : BaseViewModel() {
 
     fun signIn(email: String, password: String): Boolean {
         return if(isEmailValidate(email) && isPasswordValidate(password)){
