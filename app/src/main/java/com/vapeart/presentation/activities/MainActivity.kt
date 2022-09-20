@@ -11,8 +11,9 @@ import androidx.navigation.NavDirections
 import androidx.navigation.NavHost
 import androidx.navigation.ui.setupWithNavController
 import com.vapeart.R
+import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.ActivityMainBinding
-import com.vapeart.presentation.Navigator
+import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.fragments.HomeFragmentDirections
 import com.vapeart.presentation.viewmodels.MainActivityViewModel
 
@@ -28,24 +29,30 @@ class MainActivity : AppCompatActivity(), Navigator {
 //        setTheme(R.style.Theme_VapeArt)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        navControllerInitializer()
-        checkRegisteredUser()
         setContentView(binding.root)
-
-        binding.bottomNavigation.setupWithNavController(navController)
     }
 
     override fun onStart() {
         super.onStart()
         setToolBarDropdownMenu()
         setToolBarMenuButton()
+        navControllerInitializer()
+        checkRegisteredUser()
+        setViewModelObserver()
+    }
+
+
+    private fun setViewModelObserver(){
+        viewModel.selectedItemLiveData.observe(this){
+            setSelectedItemCount(it)
+        }
     }
 
     private fun checkRegisteredUser(){
         if(!viewModel.isUserRegistered()){
-            viewVisibility(false)
             navigate(HomeFragmentDirections.actionHomeFragmentToSignInFragment(""))
-        }
+            viewVisibility(false)
+        } else viewVisibility(true)
     }
 
     override fun navigate(direction: NavDirections) {
@@ -74,6 +81,7 @@ class MainActivity : AppCompatActivity(), Navigator {
     private fun navControllerInitializer(){
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHost
         navController = navHost.navController
+        binding.bottomNavigation.setupWithNavController(navController)
     }
 
     private fun setToolBarDropdownMenu(){
@@ -97,6 +105,17 @@ class MainActivity : AppCompatActivity(), Navigator {
     private fun setToolBarMenuButton(){
         binding.menu.setOnClickListener{
             binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+    }
+
+    private fun setSelectedItemCount(list: List<SelectedItem>){
+        if(list.isNotEmpty()){
+            var count = 0
+            list.forEach{ count+= it.amount }
+            binding.selectedItemCount.text = count.toString()
+            binding.selectedItemCount.visibility = View.VISIBLE
+        }else{
+            binding.selectedItemCount.visibility = View.GONE
         }
     }
 }

@@ -11,7 +11,7 @@ class MyApplication: Application() {
         super.onCreate()
         val appContext = applicationContext
         Firebase.initializeFirebase(appContext)
-        FirestoreRepository.getInstance()
+//        FirestoreRepository.getInstance()
         RoomRepository.initialize(appContext)
     }
 }

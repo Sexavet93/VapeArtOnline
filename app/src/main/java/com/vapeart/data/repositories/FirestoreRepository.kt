@@ -40,6 +40,7 @@ class FirestoreRepository private constructor() {
                         if (task.isSuccessful) {
                             for (item in task.result) {
                                 val myItem = item.toObject(Item::class.java)
+                                myItem.id = item.id
                                 myItem.description = myItem.description.replace("\\n", "\n")
                                 bestSellersList.add(myItem)
                                 bestSellersLiveData.postValue(bestSellersList)
@@ -58,6 +59,7 @@ class FirestoreRepository private constructor() {
                     if (task.isSuccessful) {
                         for (item in task.result) {
                             val myItem = item.toObject(Item::class.java)
+                            myItem.id = item.id
                             myItem.description = myItem.description.replace("\\n", "\n")
                             newItemList.add(myItem)
                             newItemLiveData.postValue(newItemList)
@@ -76,6 +78,7 @@ class FirestoreRepository private constructor() {
                     if (task.isSuccessful) {
                         for (item in task.result) {
                             val myItem = item.toObject(Item::class.java)
+                            myItem.id = item.id
                             myItem.description = myItem.description.replace("\\n", "\n")
                             discountsList.add(myItem)
                             discountsLiveData.postValue(discountsList)
@@ -102,8 +105,11 @@ class FirestoreRepository private constructor() {
         private var INSTANCE: FirestoreRepository? = null
 
         fun getInstance(): FirestoreRepository {
-            if (INSTANCE == null) INSTANCE = FirestoreRepository()
-            INSTANCE?.let { return it } ?: throw RuntimeException("INSTANCE is null")
+            if (INSTANCE == null)
+                INSTANCE = FirestoreRepository()
+            INSTANCE?.let {
+                return it
+            } ?: throw RuntimeException("INSTANCE is null")
         }
     }
 }

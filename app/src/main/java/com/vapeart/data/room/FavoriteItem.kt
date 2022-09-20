@@ -4,12 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class SelectedItem(
+data class FavoriteItem(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     var itemName: String = "",
     var imageUri: String = "",
     var currentPrice: String = "",
     var manufacturer: String = "",
-    var amount: Int = 0
+    var isFavorite: Boolean = false
 )

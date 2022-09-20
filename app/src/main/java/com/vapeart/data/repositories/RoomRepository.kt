@@ -2,35 +2,51 @@ package com.vapeart.data.repositories
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
+import com.vapeart.data.room.FavoriteItem
 import com.vapeart.data.room.RoomDB
 import com.vapeart.data.room.SelectedItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-private const val ROOM_DB_NAME = "database_name"
-
 class RoomRepository private constructor(context: Context) {
 
-    private val roomDB = Room.databaseBuilder(context,RoomDB::class.java, ROOM_DB_NAME).build()
+    private val roomDB = RoomDB.getInstance(context)
     private val dao = roomDB.getDao()
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
-    fun getItems(): LiveData<List<SelectedItem>>{
-        return dao.getItems()
+    fun getSelectedItems(): LiveData<List<SelectedItem>> {
+        return dao.getSelectedItems()
     }
 
-    fun getItem(id: String): LiveData<SelectedItem>{
-        return dao.getItem(id)
+    fun getFavoriteItems(): LiveData<List<FavoriteItem>>{
+        return dao.getFavoriteItems()
     }
 
-    fun addItem(item: SelectedItem){
-        coroutineScope.launch { dao.addItem(item) }
+    fun getSelectedItem(id: String): LiveData<SelectedItem>{
+        return dao.getSelectedItem(id)
     }
 
-    fun deleteItem(item: SelectedItem){
-        coroutineScope.launch { dao.deleteItem(item) }
+    fun getFavoriteItem(id: String): LiveData<FavoriteItem> {
+        return dao.getFavoriteItem(id)
+    }
+
+    fun addSelectedItem(item: SelectedItem){
+        coroutineScope.launch { dao.addSelectedItem(item) }
+    }
+
+    fun addFavoriteItem(item: FavoriteItem){
+        coroutineScope.launch { dao.addFavoriteItem(item) }
+    }
+
+    fun deleteSelectedItem(item: SelectedItem){
+        coroutineScope.launch { dao.deleteSelectedItem(item) }
+    }
+
+    fun deleteFavoriteItem(item: FavoriteItem){
+        coroutineScope.launch { dao.deleteFavoriteItem(item) }
     }
 
     companion object{

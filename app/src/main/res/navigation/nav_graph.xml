@@ -94,7 +94,6 @@
             app:argType="com.vapeart.domain.Item" />
         <argument
             android:name="image"
-            app:argType="android.graphics.Bitmap"
-            app:nullable="true" />
+            app:argType="android.graphics.Bitmap" />
     </fragment>
 </navigation>
