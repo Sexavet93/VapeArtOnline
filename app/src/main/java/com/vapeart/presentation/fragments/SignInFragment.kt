@@ -7,13 +7,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignInBinding
 import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.utils.TextWatcherImpl
 import com.vapeart.presentation.viewmodels.SignInFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInFragment : Fragment() {
 
     private var _binding: FragmentSignInBinding? = null
@@ -23,12 +27,13 @@ class SignInFragment : Fragment() {
     private lateinit var email: String
     private var password: String = ""
     private val arguments: SignInFragmentArgs by navArgs()
-    private val viewModel: SignInFragmentViewModel by activityViewModels()
+    private val viewModel: SignInFragmentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         email = arguments.email
         navigator = requireActivity() as Navigator
+        navigator.viewVisibility(false)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

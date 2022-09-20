@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vapeart.R
 import com.vapeart.data.room.SelectedItem
@@ -18,13 +18,15 @@ import com.vapeart.databinding.FragmentCartBinding
 import com.vapeart.presentation.adapters.CartAdapter
 import com.vapeart.presentation.utils.ItemsManagerImpl
 import com.vapeart.presentation.viewmodels.CartFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CartFragment : Fragment() {
 
     private var _binding: FragmentCartBinding? = null
     private val binding: FragmentCartBinding
         get() = _binding ?: throw RuntimeException("CartFragment binding is bull")
-    private val viewModel: CartFragmentViewModel by activityViewModels()
+    private val viewModel: CartFragmentViewModel by viewModels()
     private lateinit var adapter: CartAdapter
     private var itemsList: List<SelectedItem> = emptyList()
 
@@ -41,7 +43,7 @@ class CartFragment : Fragment() {
     }
 
     private fun setRecyclerViewAndAdapter(){
-        adapter = CartAdapter(emptyList(),object : ItemsManagerImpl(){
+        adapter = CartAdapter(object : ItemsManagerImpl(){
             override fun addToCart(item: SelectedItem) {
                 viewModel.addSelectedItem(item)
             }
@@ -68,8 +70,10 @@ class CartFragment : Fragment() {
                     bottomButtons.visibility = View.GONE
                 }
             }
-            adapter.setItemsList(it)
-            itemsList = it
+            if(it.size != itemsList.size){
+                adapter.submitList(it)
+                itemsList = it
+            }
         }
     }
 

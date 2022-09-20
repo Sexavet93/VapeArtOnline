@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/topText"
@@ -30,17 +31,18 @@
 
     <TextView
         android:id="@+id/createNewAccButton"
+        style="@style/text_style2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_a_new_account"
         android:layout_marginTop="3sp"
-        style="@style/text_style2"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/create_a_new_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topText"
-        android:focusable="true"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/signInText"
@@ -57,50 +59,56 @@
         android:id="@+id/emailEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
+        android:layout_marginTop="50dp"
+        android:autofillHints="emailAddress"
         android:hint="@string/email"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signInText"
-        android:layout_marginTop="50dp"/>
+        tools:ignore="TouchTargetSizeCheck"
+        style="@style/edit_text_style"/>
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:autofillHints="password"
         android:hint="@string/password"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="textPassword"
+        style="@style/edit_text_style"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailEditText"
-        android:layout_marginTop="10dp"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signInButton"
+        style="@style/button_text_style1"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginTop="100dp"
-        android:text="@string/sign_in"
         android:background="@drawable/button_shape"
-        style="@style/button_text_style1"
+        android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
+        style="@style/text_style2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/forgot_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signInButton"
         android:layout_marginTop="100dp"
-        style="@style/text_style2"
-        android:focusable="true"
         android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"/>
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/forgot_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signInButton"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ProgressBar
         android:id="@+id/progressBar"

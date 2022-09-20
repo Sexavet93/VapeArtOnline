@@ -18,6 +18,7 @@ import com.vapeart.R
 import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.ActivityMainBinding
 import com.vapeart.presentation.fragments.HomeFragmentDirections
+import com.vapeart.presentation.utils.DeviceCategory
 import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.viewmodels.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +40,7 @@ class MainActivity: AppCompatActivity(), Navigator {
         setContentView(binding.root)
         navControllerInitializer()
         checkRegisteredUser()
+        setBottomNavigationListener()
     }
 
     override fun onStart() {
@@ -49,8 +51,32 @@ class MainActivity: AppCompatActivity(), Navigator {
         setToolbarButtonsListeners()
     }
 
-    private fun setToolbarButtonsListeners(){
-        binding.menu.setOnClickListener{
+    private fun setBottomNavigationListener(){
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.homeFragment -> {
+                    if(navController.currentDestination?.id != R.id.homeFragment)
+                        navigateWithId(R.id.homeFragment)
+                }
+                R.id.wishListFragment -> {
+                    if(navController.currentDestination?.id != R.id.wishListFragment)
+                        navigateWithId(R.id.wishListFragment)
+                }
+                R.id.cartFragment -> {
+                    if(navController.currentDestination?.id != R.id.cartFragment)
+                        navigateWithId(R.id.cartFragment)
+                }
+                R.id.searchFragment -> {
+                    if(navController.currentDestination?.id != R.id.searchFragment)
+                        navigateWithId(R.id.searchFragment)
+                }
+            }
+            true
+        }
+    }
+
+    private fun setToolbarButtonsListeners() {
+        binding.menu.setOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
 
@@ -58,41 +84,62 @@ class MainActivity: AppCompatActivity(), Navigator {
             popupMenu.show()
         }
 
-        binding.call.setOnClickListener{
-            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+994704030313"))
+        binding.call.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL,
+                Uri.parse("tel:" + getString(R.string.seller_phone)))
             startActivity(intent)
         }
 
-        binding.cart.setOnClickListener{
-            if(navController.currentDestination?.id != R.id.cartFragment){
-                navController.navigate(R.id.cartFragment,null,navOptions { popUpTo(R.id.cartFragment){inclusive = true} })
+        binding.cart.setOnClickListener {
+            if (navController.currentDestination?.id != R.id.cartFragment) {
+                navController.navigate(
+                    R.id.cartFragment,
+                    null,
+                    navOptions { popUpTo(R.id.cartFragment) { inclusive = true } })
             }
         }
     }
 
-    private fun setNavigationMenu(){
+    private fun setNavigationMenu() {
         binding.navigationView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.devices ->  navigateWithId(R.id.itemsReviewFragment,"devices")
-                R.id.disposableDevices ->  navigateWithId(R.id.itemsReviewFragment,"disposable_devices")
-                R.id.atomizers -> navigateWithId(R.id.itemsReviewFragment,"atomizers")
-                R.id.cartridgeAndCoils -> navigateWithId(R.id.itemsReviewFragment,"cartridges_and_coils")
-                R.id.regularLiquids -> navigateWithId(R.id.itemsReviewFragment,"regular_liquids")
-                R.id.saltNicotineLiquids -> navigateWithId(R.id.itemsReviewFragment,"salt_nicotine_liquids")
+            when (it.itemId) {
+                R.id.devices -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.DEVICES)
+                R.id.disposableDevices -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.DISPOSABLE_DEVICES)
+                R.id.atomizers -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.ATOMIZERS)
+                R.id.cartridgeAndCoils -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.CARTRIDGES_AND_COILS)
+                R.id.regularLiquids -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.REGULAR_LIQUIDS)
+                R.id.saltNicotineLiquids -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.SALT_NICOTINE_LIQUIDS)
             }
             true
         }
     }
 
-    private fun setViewModelObserver(){
-        viewModel.selectedItemLiveData.observe(this){
+    private fun navigateWithId(id: Int, query: String) {
+        navController.navigate(id,
+            bundleOf("query" to query),
+            navOptions { popUpTo(id){inclusive = true}})
+        binding.drawerLayout.closeDrawers()
+    }
+
+    private fun navigateWithId(id: Int) {
+        val popUpToId = navController.currentDestination?.id ?: 0
+        navController.navigate(
+            id,
+            null,
+            navOptions { popUpTo(popUpToId) { inclusive = true } }
+        )
+        binding.drawerLayout.closeDrawers()
+    }
+
+    private fun setViewModelObserver() {
+        viewModel.selectedItemLiveData.observe(this) {
             setSelectedItemCount(it)
         }
     }
 
-    private fun checkRegisteredUser(){
-        if(!viewModel.isUserRegistered()){
-            navigate(HomeFragmentDirections.actionHomeFragmentToSignInFragment(""))
+    private fun checkRegisteredUser() {
+        if (!viewModel.isUserRegistered()) {
+            navigate(HomeFragmentDirections.actionHomeFragmentToSignInFragment())
             viewVisibility(false)
         } else viewVisibility(true)
     }
@@ -106,13 +153,12 @@ class MainActivity: AppCompatActivity(), Navigator {
     }
 
     override fun viewVisibility(isVisible: Boolean) {
-        if(isVisible){
+        if (isVisible) {
             binding.apply {
                 bottomNavigation.visibility = View.VISIBLE
                 toolBar.visibility = View.VISIBLE
             }
-        }
-        else {
+        } else {
             binding.apply {
                 bottomNavigation.visibility = View.GONE
                 toolBar.visibility = View.GONE
@@ -120,44 +166,42 @@ class MainActivity: AppCompatActivity(), Navigator {
         }
     }
 
-    private fun navigateWithId(id: Int, query: String){
-        navController.navigate(
-            id,
-            bundleOf("query" to query)
-            ,navOptions { popUpTo(id){inclusive = true} }
-        )
-        binding.drawerLayout.closeDrawers()
-    }
-
-    private fun navControllerInitializer(){
+    private fun navControllerInitializer() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHost
         navController = navHost.navController
         binding.bottomNavigation.setupWithNavController(navController)
     }
 
-    private fun initializePopUpMenu(){
+    private fun initializePopUpMenu() {
         popupMenu = PopupMenu(this, binding.dropdownMenu)
         popupMenu.menu.add(SIGN_OUT_BUTTON)
         popupMenu.setOnMenuItemClickListener {
-            when(it.toString()){
+            when (it.toString()) {
                 SIGN_OUT_BUTTON -> {
                     viewModel.signOut()
-                    navController.navigate(HomeFragmentDirections.actionHomeFragmentToSignInFragment(""))
-                    viewVisibility(false)
+                    navigate(HomeFragmentDirections.actionHomeFragmentToSignInFragment(""))
                 }
             }
             return@setOnMenuItemClickListener true
         }
     }
 
-    private fun setSelectedItemCount(list: List<SelectedItem>){
-        if(list.isNotEmpty()){
-            var count = 0
-            list.forEach{ count+= it.amount }
-            binding.selectedItemCount.text = count.toString()
+    private fun setSelectedItemCount(list: List<SelectedItem>) {
+        if (list.isNotEmpty()) {
             binding.selectedItemCount.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.selectedItemCount.visibility = View.GONE
         }
     }
+
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isOpen)
+            binding.drawerLayout.closeDrawers()
+        else super.onBackPressed()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
 }

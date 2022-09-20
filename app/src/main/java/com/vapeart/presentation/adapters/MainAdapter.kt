@@ -23,9 +23,9 @@ class MainAdapter(private val navigator: Navigator):
     ListAdapter<Item, MainAdapter.MainViewHolder>(DiffCallbacks.mainAdapterDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.MainViewHolder {
-        val view = LayoutInflater
-            .from(parent.context).inflate(R.layout.main_adapter_item_layout,parent,false)
-        return MainViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = MainAdapterItemLayoutBinding.inflate(inflater,parent,false)
+        return MainViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MainAdapter.MainViewHolder, position: Int) {
@@ -52,16 +52,11 @@ class MainAdapter(private val navigator: Navigator):
         holder.binding.priceGroup.visibility = View.GONE
     }
 
-    inner class MainViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val binding: MainAdapterItemLayoutBinding = MainAdapterItemLayoutBinding.bind(view)
-        var isOnClickListenerSet: Boolean = false
+    inner class MainViewHolder(val binding: MainAdapterItemLayoutBinding): RecyclerView.ViewHolder(binding.root){
 
         fun setOnClickListener(item: Item){
-            if(!isOnClickListenerSet){
-                isOnClickListenerSet = true
-                binding.root.setOnClickListener{
-                    navigator.navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item))
-                }
+            binding.root.setOnClickListener{
+                navigator.navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item))
             }
         }
     }

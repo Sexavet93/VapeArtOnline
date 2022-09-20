@@ -17,9 +17,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class RoomModule {
 
-    @Provides
-    @Singleton
-    fun getRoomDb(@ApplicationContext context: Context): RoomDB {
+    private fun getRoomDb(context: Context): RoomDB {
         return Room.databaseBuilder(
             context.applicationContext,
             RoomDB::class.java,
@@ -28,8 +26,9 @@ class RoomModule {
     }
 
     @Provides
-    fun getDao(roomDb: RoomDB): RoomDao {
-        return roomDb.getDao()
+    @Singleton
+    fun getDao(@ApplicationContext context: Context): RoomDao {
+        return getRoomDb(context).getDao()
     }
 
 }

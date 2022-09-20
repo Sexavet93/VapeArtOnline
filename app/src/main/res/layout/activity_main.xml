@@ -17,58 +17,66 @@
             android:layout_height="65dp"
             android:background="@color/my_brown"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/menu"
+                style="@style/clickable_button_style"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/ic_menu"
-                style="@style/clickable_button_style"/>
+                android:contentDescription="@string/category"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/logo" />
+                android:src="@drawable/logo"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/call"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="30dp"
-                android:background="@drawable/ic_phone"
-                style="@style/clickable_button_style"/>
+                style="@style/clickable_button_style"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/phone_call"
+                android:contentDescription="@string/call"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <FrameLayout
                 android:id="@+id/cart"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/ic_bag"
-                style="@style/clickable_button_style">
+                style="@style/clickable_button_style"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/shopping_cart"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck">
 
-                <TextView
+                <ImageView
                     android:id="@+id/selectedItemCount"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="@color/red"
-                    tools:text="10"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/dot"
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription" />
 
             </FrameLayout>
 
             <ImageView
                 android:id="@+id/dropdownMenu"
+                style="@style/clickable_button_style"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/ic_dropdown_menu"
-                style="@style/clickable_button_style" />
+                android:contentDescription="@string/menu"
+                tools:ignore="TouchTargetSizeCheck"/>
 
         </androidx.appcompat.widget.Toolbar>
 

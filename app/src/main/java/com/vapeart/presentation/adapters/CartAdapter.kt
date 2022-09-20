@@ -16,21 +16,17 @@ import com.vapeart.presentation.utils.DiffCallbacks
 import com.vapeart.presentation.utils.GlideCustomTarget
 import com.vapeart.presentation.utils.ItemsManager
 
-class CartAdapter(private var itemList: List<SelectedItem>,private val itemsManager: ItemsManager)
-    : RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
-
-    fun setItemsList(list: List<SelectedItem>){
-        itemList = list
-        notifyDataSetChanged()
-    }
+class CartAdapter(private val itemsManager: ItemsManager)
+    : ListAdapter<SelectedItem, CartAdapter.CartViewHolder>(DiffCallbacks.cartListDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapter.CartViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.cart_list_item_layout,parent,false)
-        return CartViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = CartListItemLayoutBinding.inflate(inflater,parent,false)
+        return CartViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CartAdapter.CartViewHolder, position: Int) {
-        val item = itemList[position]
+        val item = currentList[position]
         holder.binding.apply {
             Glide.with(root).asBitmap().load(item.imageUri).into(object : GlideCustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
@@ -38,7 +34,7 @@ class CartAdapter(private var itemList: List<SelectedItem>,private val itemsMana
                     itemImageView.setImageBitmap(resource)
                 }
             })
-            brendImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
+            brandImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
             itemNameTextView.text = item.itemName
             itemAmountTextView.text = item.amount.toString()
             val totalPrice: Double = try {
@@ -49,11 +45,8 @@ class CartAdapter(private var itemList: List<SelectedItem>,private val itemsMana
         holder.setButtonListeners(item)
     }
 
-    override fun getItemCount() = itemList.size
-
-    inner class CartViewHolder(view: View): RecyclerView.ViewHolder(view){
-
-        val binding = CartListItemLayoutBinding.bind(view)
+    inner class CartViewHolder(val binding: CartListItemLayoutBinding)
+        : RecyclerView.ViewHolder(binding.root){
 
         fun setButtonListeners(item: SelectedItem){
             binding.apply {
@@ -65,6 +58,8 @@ class CartAdapter(private var itemList: List<SelectedItem>,private val itemsMana
                     itemAmountTextView.text = itemAmount.toString()
                     item.amount = itemAmount
                     itemsManager.addToCart(item)
+                    onBindViewHolder(this@CartViewHolder,adapterPosition)
+
                 }
                 removeItemButton.setOnClickListener {
                     var itemAmount = itemAmountTextView.text.toString().toInt()
@@ -73,86 +68,10 @@ class CartAdapter(private var itemList: List<SelectedItem>,private val itemsMana
                         itemAmountTextView.text = itemAmount.toString()
                         item.amount = itemAmount
                         itemsManager.addToCart(item)
+                    onBindViewHolder(this@CartViewHolder,adapterPosition)
                     }
                 }
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    ListAdapter<SelectedItem, CartAdapter.CartViewHolder>(DiffCallbacks.cartListDiffCallback) {
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapter.CartViewHolder {
-//        val view = LayoutInflater.from(parent.context).inflate(R.layout.cart_list_item_layout,parent,false)
-//        return CartViewHolder(view)
-//    }
-//
-//    override fun onBindViewHolder(holder: CartAdapter.CartViewHolder, position: Int) {
-//        val item = currentList[position]
-//        holder.binding.apply {
-//            Glide.with(root).asBitmap().load(item.imageUri).into(object : GlideCustomTarget<Bitmap>() {
-//                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-//                    progressBar.visibility = View.GONE
-//                    itemImageView.setImageBitmap(resource)
-//                }
-//            })
-//            brendImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
-//            itemNameTextView.text = item.itemName
-//            itemAmountTextView.text = item.amount.toString()
-//            val totalPrice: Double = try {
-//                item.currentPrice.toDouble() * item.amount
-//            }catch(e: Exception){ 0.00 }
-//            currentPriceTextView.text = String.format("%.2f", totalPrice)
-//        }
-//        holder.setButtonListeners(item)
-//    }
-//
-//    inner class CartViewHolder(view: View): RecyclerView.ViewHolder(view){
-//
-//        val binding = CartListItemLayoutBinding.bind(view)
-//
-//        fun setButtonListeners(item: SelectedItem){
-//            binding.apply {
-//                deleteButton.setOnClickListener{
-//                    itemsManager.deleteFromCart(item)
-//                }
-//                appendItemButton.setOnClickListener {
-//                    val itemAmount = itemAmountTextView.text.toString().toInt() + 1
-//                    itemAmountTextView.text = itemAmount.toString()
-//                    item.amount = itemAmount
-//                    itemsManager.addToCart(item)
-//                }
-//                removeItemButton.setOnClickListener {
-//                    var itemAmount = itemAmountTextView.text.toString().toInt()
-//                    if (itemAmount > 1) {
-//                        itemAmount--
-//                        itemAmountTextView.text = itemAmount.toString()
-//                        item.amount = itemAmount
-//                        itemsManager.addToCart(item)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}

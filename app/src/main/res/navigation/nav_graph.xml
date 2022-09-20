@@ -67,7 +67,8 @@
             app:popExitAnim="@anim/slide_out"/>
         <argument
             android:name="email"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue='' />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -81,7 +82,11 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/wishListFragment"
@@ -104,6 +109,10 @@
         tools:layout="@layout/fragment_items_review" >
         <action
             android:id="@+id/action_itemsReviewFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
 </navigation>

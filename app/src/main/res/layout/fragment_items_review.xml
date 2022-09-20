@@ -9,7 +9,8 @@
         android:id="@+id/categoryNameTextview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:text="category name"/>
+        android:textColor="#FF6F00"
+        tools:text="category name" />
 
     <ProgressBar
         android:id="@+id/progressBar"
