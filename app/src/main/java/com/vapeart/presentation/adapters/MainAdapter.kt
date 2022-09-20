@@ -53,14 +53,10 @@ class MainAdapter(private val navigator: Navigator):
     }
 
     inner class MainViewHolder(val binding: MainAdapterItemLayoutBinding): RecyclerView.ViewHolder(binding.root){
-        var isOnClickListenerSet: Boolean = false
 
         fun setOnClickListener(item: Item){
-            if(!isOnClickListenerSet){
-                isOnClickListenerSet = true
-                binding.root.setOnClickListener{
-                    navigator.navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item))
-                }
+            binding.root.setOnClickListener{
+                navigator.navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item))
             }
         }
     }

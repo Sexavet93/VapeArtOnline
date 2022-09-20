@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
 
 
     <TextView
@@ -42,68 +43,73 @@
 
     <EditText
         android:id="@+id/emailEditText"
+        style="@style/edit_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:autofillHints="emailAddress"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/passwordEditText"
+        style="@style/edit_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:autofillHints="password"
         android:hint="@string/password"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailEditText"
-        android:layout_marginTop="10dp"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/confirmPasswordEditText"
+        style="@style/edit_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:autofillHints="password"
         android:hint="@string/confirm_password"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordEditText"
-        android:layout_marginTop="10dp"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signUpButton"
+        style="@style/button_text_style1"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:text="@string/sign_up"
-        style="@style/button_text_style1"
+        android:layout_marginTop="40dp"
         android:background="@drawable/button_shape"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/confirmPasswordEditText"
-        android:layout_marginTop="40dp"/>
+        tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/signInTextView"
+        style="@style/text_style2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/sign_in"
-        style="@style/text_style2"
         app:layout_constraintEnd_toEndOf="@+id/topText"
         app:layout_constraintStart_toStartOf="@+id/topText"
         app:layout_constraintTop_toBottomOf="@+id/topText"
-        android:layout_marginTop="10dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"/>
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ProgressBar
         android:id="@+id/progressBar"

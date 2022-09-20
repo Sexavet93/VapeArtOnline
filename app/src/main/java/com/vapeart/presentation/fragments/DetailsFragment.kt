@@ -136,7 +136,6 @@ class DetailsFragment : Fragment() {
                 showToast(getString(R.string.install_whatsapp))
             }
         }
-
     }
 
     private fun setAddToFavoritesButtonListener(){

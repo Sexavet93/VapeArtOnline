@@ -3,7 +3,6 @@ package com.vapeart.presentation.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +18,7 @@ import com.vapeart.R
 import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.ActivityMainBinding
 import com.vapeart.presentation.fragments.HomeFragmentDirections
-import com.vapeart.presentation.fragments.SignInFragmentDirections
+import com.vapeart.presentation.utils.DeviceCategory
 import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.viewmodels.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,7 +85,8 @@ class MainActivity: AppCompatActivity(), Navigator {
         }
 
         binding.call.setOnClickListener {
-            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+994704030313"))
+            val intent = Intent(Intent.ACTION_DIAL,
+                Uri.parse("tel:" + getString(R.string.seller_phone)))
             startActivity(intent)
         }
 
@@ -103,29 +103,21 @@ class MainActivity: AppCompatActivity(), Navigator {
     private fun setNavigationMenu() {
         binding.navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.devices -> navigateWithId(R.id.itemsReviewFragment, "devices")
-                R.id.disposableDevices -> navigateWithId(
-                    R.id.itemsReviewFragment,
-                    "disposable_devices"
-                )
-                R.id.atomizers -> navigateWithId(R.id.itemsReviewFragment, "atomizers")
-                R.id.cartridgeAndCoils -> navigateWithId(
-                    R.id.itemsReviewFragment,
-                    "cartridges_and_coils"
-                )
-                R.id.regularLiquids -> navigateWithId(R.id.itemsReviewFragment, "regular_liquids")
-                R.id.saltNicotineLiquids -> navigateWithId(
-                    R.id.itemsReviewFragment,
-                    "salt_nicotine_liquids"
-                )
+                R.id.devices -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.DEVICES)
+                R.id.disposableDevices -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.DISPOSABLE_DEVICES)
+                R.id.atomizers -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.ATOMIZERS)
+                R.id.cartridgeAndCoils -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.CARTRIDGES_AND_COILS)
+                R.id.regularLiquids -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.REGULAR_LIQUIDS)
+                R.id.saltNicotineLiquids -> navigateWithId(R.id.itemsReviewFragment, DeviceCategory.SALT_NICOTINE_LIQUIDS)
             }
             true
         }
     }
 
     private fun navigateWithId(id: Int, query: String) {
-        val popUpToId = navController.currentDestination?.id ?: 0
-        navController.navigate(id, bundleOf("query" to query))
+        navController.navigate(id,
+            bundleOf("query" to query),
+            navOptions { popUpTo(id){inclusive = true}})
         binding.drawerLayout.closeDrawers()
     }
 
@@ -206,6 +198,10 @@ class MainActivity: AppCompatActivity(), Navigator {
         if (binding.drawerLayout.isOpen)
             binding.drawerLayout.closeDrawers()
         else super.onBackPressed()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }

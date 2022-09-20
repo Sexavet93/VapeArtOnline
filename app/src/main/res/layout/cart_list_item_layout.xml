@@ -32,12 +32,13 @@
         style="@style/clickable_button_style"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:contentDescription="@string/delete_item"
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        android:contentDescription="@string/delete_item"/>
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
     <ImageView
         android:id="@+id/progressBar"
@@ -54,15 +55,16 @@
         android:id="@+id/itemNameTextView"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/itemImageView"
-        android:layout_marginStart="5dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        tools:text="Any Device Name"
-        android:ellipsize="end"
-        android:lines="1" />
+        tools:ignore="TextContrastCheck"
+        tools:text="Any Device Name" />
 
 
     <TextView
@@ -93,10 +95,11 @@
         android:id="@+id/totalPriceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/currentPriceTextView"
-        app:layout_constraintEnd_toEndOf="@id/currencyTextView2"
+        android:text="@string/total_price"
         app:layout_constraintBottom_toTopOf="@id/addToCartCalculator"
-        android:text="@string/total_price"/>
+        app:layout_constraintEnd_toEndOf="@id/currencyTextView2"
+        app:layout_constraintStart_toStartOf="@id/currentPriceTextView"
+        tools:ignore="TextContrastCheck" />
 
     <LinearLayout
         android:id="@+id/addToCartCalculator"
@@ -120,29 +123,31 @@
 
         <ImageButton
             android:id="@+id/appendItemButton"
+            style="@style/clickable_button_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
+            android:background="@drawable/ic_add"
+            android:contentDescription="@string/add_item"
             android:textColor="@color/my_orange"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:background="@drawable/ic_add"
-            style="@style/clickable_button_style"
-            android:contentDescription="@string/add_item" />
+            tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
         <ImageButton
             android:id="@+id/removeItemButton"
+            style="@style/clickable_button_style"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_remove"
+            android:contentDescription="@string/delete_item"
             android:textColor="@color/grey"
             android:textSize="35sp"
             android:textStyle="bold"
-            android:background="@drawable/ic_remove"
-            style="@style/clickable_button_style"
-            android:contentDescription="@string/delete_item"
-            android:layout_marginStart="10dp"/>
+            tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
     </LinearLayout>
 

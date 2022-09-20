@@ -27,7 +27,8 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/ic_menu"
-                android:contentDescription="@string/category" />
+                android:contentDescription="@string/category"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
                 android:layout_width="150dp"
@@ -44,7 +45,8 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/phone_call"
-                android:contentDescription="@string/call" />
+                android:contentDescription="@string/call"
+                tools:ignore="TouchTargetSizeCheck"/>
 
             <FrameLayout
                 android:id="@+id/cart"
@@ -52,7 +54,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="20dp"
-                android:background="@drawable/shopping_cart">
+                android:background="@drawable/shopping_cart"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck">
 
                 <ImageView
                     android:id="@+id/selectedItemCount"
@@ -60,7 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:src="@drawable/dot"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription" />
 
             </FrameLayout>
 
@@ -71,7 +75,8 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/ic_dropdown_menu"
-                android:contentDescription="@string/menu" />
+                android:contentDescription="@string/menu"
+                tools:ignore="TouchTargetSizeCheck"/>
 
         </androidx.appcompat.widget.Toolbar>
 
