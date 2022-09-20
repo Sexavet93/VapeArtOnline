@@ -89,6 +89,24 @@ class FirestoreRepository private constructor() {
         }
     }
 
+    fun getQueryItemsList(query: String): MutableLiveData<List<Item>>{
+        val queryLiveData: MutableLiveData<List<Item>> = MutableLiveData()
+        val itemList = mutableListOf<Item>()
+        coroutineScope.launch {
+            firebaseCloud.collection(query).get().addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    task.result.forEach {
+                        val item = it.toObject(Item::class.java)
+                        item.id = it.id
+                        itemList.add(item)
+                        queryLiveData.postValue(itemList)
+                    }
+                }
+            }
+        }
+        return queryLiveData
+    }
+
     fun getBestSellersLiveData(): LiveData<List<Item>>{
         return bestSellersLiveData
     }

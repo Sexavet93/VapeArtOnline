@@ -92,8 +92,14 @@
         <argument
             android:name="item"
             app:argType="com.vapeart.domain.Item" />
-        <argument
-            android:name="image"
-            app:argType="android.graphics.Bitmap" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemsReviewFragment"
+        android:name="com.vapeart.presentation.fragments.ItemsReviewFragment"
+        android:label="fragment_items_review"
+        tools:layout="@layout/fragment_items_review" >
+        <action
+            android:id="@+id/action_itemsReviewFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
 </navigation>

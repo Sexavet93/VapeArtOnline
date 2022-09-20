@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.vapeart.R
 import com.vapeart.data.room.FavoriteItem
 import com.vapeart.data.room.SelectedItem
@@ -73,13 +74,12 @@ class DetailsFragment : Fragment() {
     }
 
     private fun setFragmentContent(){
-        val image = arguments.image
         binding.apply {
             categoryNameTextView.text = item.category
             itemNameTextViewTop.text = item.name
             brendImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
-            itemImageView.setImageBitmap(image)
-            itemNameTextViewBottom.text = item.name
+            Glide.with(root).load(item.imageUri).into(itemImageView)
+            itemNameTextView.text = item.name
             currentPriceTextView.text = item.currentPrice
             descriptionTextView.text = item.description
             if(item.oldPrice != "0"){
@@ -157,10 +157,10 @@ class DetailsFragment : Fragment() {
         Toast.makeText(requireContext(), expression, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 
     private fun setFavoriteButtonTextAndImage(){
         binding.apply {

@@ -46,6 +46,21 @@
         <item name="android:fontFamily">@font/salsa</item>
     </style>
 
+    <style name="old_price_text_style2">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:foreground">@drawable/bold_strikethrough</item>
+        <item name="android:fontFamily">@font/salsa</item>
+    </style>
+
+    <style name="price_text_style">
+        <item name="android:fontFamily">@font/salsa</item>
+        <item name="android:textColor">@color/my_orange</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="clickable_button_style">
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>

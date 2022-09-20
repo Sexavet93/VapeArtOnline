@@ -1,5 +1,6 @@
 package com.vapeart.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.vapeart.data.repositories.RoomRepository

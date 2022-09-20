@@ -10,10 +10,9 @@
         android:id="@+id/brendImageView"
         android:layout_width="100dp"
         android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@id/itemImageView"
+        app:layout_constraintTop_toTopOf="@id/itemImageView"
+        android:layout_marginEnd="100dp"
         tools:src="@drawable/logo"/>
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -21,7 +20,6 @@
         android:layout_width="200dp"
         android:layout_height="240dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
@@ -37,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.83"/>
+        app:layout_constraintHorizontal_bias="0.95"/>
 
     <ImageView
         android:id="@+id/progressBar"
@@ -47,54 +45,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="150dp"
-        android:src="@drawable/progress_animation"/>
+        android:src="@drawable/progress_animation"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/itemNameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/itemImageView"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@color/black"
-        tools:text="asfj lkasj fglasd fsopakdf" />
+        tools:text="Any Device Name"
+        android:ellipsize="end"
+        android:lines="1" />
 
 
     <TextView
         android:id="@+id/currentPriceTextView"
+        style="@style/text_style1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemNameTextView"
-        android:layout_marginTop="7dp"
-        style="@style/text_style1"
+        app:layout_constraintBottom_toTopOf="@id/addToCartCalculator"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="@+id/addToCartCalculator"
+        android:layout_marginStart="10dp"
         tools:text="30.00" />
 
     <TextView
         android:id="@+id/currencyTextView2"
         android:layout_width="wrap_content"
         android:layout_height="15sp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/azn"
         android:textColor="@color/my_orange"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/currentPriceTextView"
-        app:layout_constraintTop_toBottomOf="@id/itemNameTextView" />
+        app:layout_constraintBottom_toTopOf="@id/addToCartCalculator"
+        app:layout_constraintStart_toEndOf="@+id/currentPriceTextView"
+        app:layout_goneMarginEnd="10dp" />
 
     <LinearLayout
         android:id="@+id/addToCartCalculator"
-        android:layout_width="150dp"
+        android:layout_width="110dp"
         android:layout_height="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/addToCartButton"
-        app:layout_constraintTop_toBottomOf="@id/currentPriceTextView"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corners">
+        app:layout_constraintStart_toEndOf="@id/itemImageView"
+        app:layout_constraintTop_toBottomOf="@id/brendImageView"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/rounded_corners"
+        android:layout_marginStart="10dp">
 
         <TextView
             android:id="@+id/itemAmountTextView"
@@ -111,55 +112,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="20dp"
             android:textColor="@color/my_orange"
             android:textSize="30sp"
             android:textStyle="bold"
             android:background="@drawable/ic_add"
-            style="@style/clickable_button_style"/>
+            style="@style/clickable_button_style"
+            android:contentDescription="@string/add_item" />
 
         <ImageButton
             android:id="@+id/removeItemButton"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginStart="20dp"
             android:textColor="@color/grey"
             android:textSize="35sp"
             android:textStyle="bold"
             android:background="@drawable/ic_remove"
-            style="@style/clickable_button_style"/>
+            style="@style/clickable_button_style"
+            android:contentDescription="@string/delete_item"
+            android:layout_marginStart="10dp"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/addToCartButton"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/currentPriceTextView"
-        app:layout_constraintStart_toEndOf="@id/addToCartCalculator"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corners"
-        android:backgroundTint="@color/teal_200"
-        style="@style/clickable_button_style">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="10dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_bag" />
-
-        <TextView
-            style="@style/button_text_style1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:text="@string/add_to_cart"
-            android:textColor="@color/my_orange" />
-
-    </LinearLayout>
+        android:background="@color/grey"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

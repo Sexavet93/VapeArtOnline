@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vapeart.R
@@ -14,10 +13,10 @@ import com.vapeart.data.room.FavoriteItem
 import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.FragmentWishListBinding
 import com.vapeart.presentation.adapters.WishListAdapter
-import com.vapeart.presentation.utils.WishListLayoutCallback
+import com.vapeart.presentation.utils.ItemsManagerImpl
 import com.vapeart.presentation.viewmodels.WishListFragmentViewModel
 
-class WishListFragment : Fragment(), WishListLayoutCallback {
+class WishListFragment : ItemsManagerImpl() {
 
     private var _binding: FragmentWishListBinding? = null
     private val binding: FragmentWishListBinding
@@ -52,12 +51,12 @@ class WishListFragment : Fragment(), WishListLayoutCallback {
             binding.defaultTextView.visibility = View.VISIBLE
         }
     }
-    override fun addToCartCallback(item: SelectedItem) {
+    override fun addToCart(item: SelectedItem) {
         viewModel.addSelectedItem(item)
-        showToast(getString(R.string.warning))
+        showToast(getString(R.string.item_added_to_cart))
     }
 
-    override fun deleteItemCallback(item: FavoriteItem) {
+    override fun deleteItem(item: FavoriteItem) {
         viewModel.deleteFavoriteItem(item)
         showToast(getString(R.string.delete_favorite_item))
     }

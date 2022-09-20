@@ -52,14 +52,13 @@
 
                 <TextView
                     android:id="@+id/selectedItemCount"
-                    android:layout_width="15dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="15dp"
-                    android:layout_gravity="end"
-                    android:background="@drawable/round_shape"
+                    android:layout_gravity="center"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:visibility="visible"
-                    tools:text="1"/>
+                    android:textColor="@color/red"
+                    tools:text="10"/>
 
             </FrameLayout>
 
@@ -98,10 +97,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/navigation_view_menu"
-        app:headerLayout="@layout/navigation_view_header"/>
+        app:headerLayout="@layout/navigation_view_header"
+        android:background="@color/my_brown"
+        app:itemIconTint="@color/my_orange"
+        app:itemTextColor="@color/white"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
