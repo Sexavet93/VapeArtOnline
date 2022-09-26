@@ -200,8 +200,4 @@ class MainActivity: AppCompatActivity(), Navigator {
         else super.onBackPressed()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 }
