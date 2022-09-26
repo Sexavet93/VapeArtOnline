@@ -27,7 +27,7 @@ class WishListFragment : Fragment() {
     private val viewModel: WishListFragmentViewModel by viewModels()
     private lateinit var adapter: WishListAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View{
         _binding = FragmentWishListBinding.inflate(inflater,container,false)
         return binding.root
     }
