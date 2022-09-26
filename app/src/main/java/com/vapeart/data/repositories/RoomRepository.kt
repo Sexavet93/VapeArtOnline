@@ -1,11 +1,7 @@
 package com.vapeart.data.repositories
 
-import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.room.Room
 import com.vapeart.data.room.FavoriteItem
-import com.vapeart.data.room.RoomDB
 import com.vapeart.data.room.RoomDao
 import com.vapeart.data.room.SelectedItem
 import kotlinx.coroutines.CoroutineScope
