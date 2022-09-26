@@ -37,12 +37,16 @@ class CartAdapter(private val itemsManager: ItemsManager)
             brandImageView.setImageResource(Assistant.brandsList.getOrDefault(item.manufacturer,R.drawable.logo))
             itemNameTextView.text = item.itemName
             itemAmountTextView.text = item.amount.toString()
-            val totalPrice: Double = try {
-                item.currentPrice.toDouble() * item.amount
-            }catch(e: Exception){ 0.00 }
-            currentPriceTextView.text = String.format("%.2f", totalPrice)
+            currentPriceTextView.text = getTotalPrice(item)
         }
         holder.setButtonListeners(item)
+    }
+
+    private fun getTotalPrice(item: SelectedItem): String{
+        val totalPrice: Double = try {
+            item.currentPrice.toDouble() * item.amount
+        }catch(e: Exception){ 0.00 }
+        return String.format("%.2f", totalPrice)
     }
 
     inner class CartViewHolder(val binding: CartListItemLayoutBinding)
@@ -58,7 +62,7 @@ class CartAdapter(private val itemsManager: ItemsManager)
                     itemAmountTextView.text = itemAmount.toString()
                     item.amount = itemAmount
                     itemsManager.addToCart(item)
-                    onBindViewHolder(this@CartViewHolder,adapterPosition)
+                    currentPriceTextView.text = getTotalPrice(item)
 
                 }
                 removeItemButton.setOnClickListener {
@@ -68,7 +72,7 @@ class CartAdapter(private val itemsManager: ItemsManager)
                         itemAmountTextView.text = itemAmount.toString()
                         item.amount = itemAmount
                         itemsManager.addToCart(item)
-                    onBindViewHolder(this@CartViewHolder,adapterPosition)
+                        currentPriceTextView.text = getTotalPrice(item)
                     }
                 }
             }
