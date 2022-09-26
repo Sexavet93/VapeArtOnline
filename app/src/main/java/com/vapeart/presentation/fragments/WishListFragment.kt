@@ -36,8 +36,11 @@ class WishListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = WishListAdapter(object : ItemsManagerImpl(){
             override fun addToCart(item: SelectedItem) {
-                viewModel.addSelectedItem(item)
-                showToast(getString(R.string.item_added_to_cart))
+                if(item.amount > 0){
+                    viewModel.addSelectedItem(item)
+                    showToast(getString(R.string.item_added_to_cart))
+                } else
+                    showToast(getString(R.string.item_quantity_warning))
             }
             override fun deleteItem(item: FavoriteItem) {
                 viewModel.deleteFavoriteItem(item)

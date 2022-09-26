@@ -62,18 +62,16 @@ class WishListAdapter(
                 } catch (exception: Exception) {
                     0
                 }
-                if (itemQuantity > 0) {
-                    val selectedItem = SelectedItem(
-                        item.id,
-                        item.itemName,
-                        item.imageUri,
-                        item.currentPrice,
-                        item.manufacturer,
-                        itemQuantity
-                    )
-                    callback.addToCart(selectedItem)
-                    binding.itemAmountTextView.text = DEFAULT_ITEM_AMOUNT_SIZE
-                }
+                val selectedItem = SelectedItem(
+                    item.id,
+                    item.itemName,
+                    item.imageUri,
+                    item.currentPrice,
+                    item.manufacturer,
+                    itemQuantity
+                )
+                callback.addToCart(selectedItem)
+                binding.itemAmountTextView.text = DEFAULT_ITEM_AMOUNT_SIZE
             }
         }
 
