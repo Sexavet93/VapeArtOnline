@@ -97,6 +97,7 @@
         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
+        android:id="@+id/forgotPassword"
         style="@style/text_style2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,7 +108,7 @@
         android:text="@string/forgot_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signInButton"
+        app:layout_constraintTop_toBottomOf="@id/submitButton"
         tools:ignore="TouchTargetSizeCheck" />
 
     <ProgressBar

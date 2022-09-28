@@ -7,16 +7,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInFragmentViewModel @Inject constructor(private var firebaseAuthRepo: SignInRepository) : BaseViewModel() {
+class ForgotPasswordFragmentViewModel @Inject constructor(private var firebaseAuthRepo: SignInRepository): BaseViewModel() {
 
-    fun signIn(email: String, password: String): Boolean {
-        return if(isEmailValidate(email) && isPasswordValidate(password)){
-            firebaseAuthRepo.signIn(email, password) { isSuccessful, message ->
+    fun sendPasswordResetEmail(email: String): Boolean {
+        return if(isEmailValidate(email)){
+            firebaseAuthRepo.sendPasswordResetEmail(email) { isSuccessful, message ->
                 _isSuccess.value = isSuccessful
                 _exceptionMessage.value = message
             }
             true
         } else false
     }
-
 }

@@ -44,7 +44,7 @@ class SignUpFragment : Fragment() {
         setEmailEditText()
         setTextChangedListeners()
         setSignUpButtonListener()
-        setupLiveDataMonitoring()
+        viewModelObserversRegister()
         setSignInButton()
     }
 
@@ -78,16 +78,17 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private fun setupLiveDataMonitoring(){
+    private fun viewModelObserversRegister(){
         viewModel.isSuccess.observe(viewLifecycleOwner){ isSuccess ->
             if(isSuccess){
                 showToast(getString(R.string.registration_is_successful))
                 navigator
                     .navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment(email))
             }
-            else {
+
+            viewModel.exceptionMessage.observe(viewLifecycleOwner){ message ->
+                if(message.isNotEmpty()) showToast(message)
                 binding.progressBar.visibility = View.GONE
-                showToast(getString(R.string.warning))
             }
         }
     }
@@ -99,7 +100,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun showToast(expression: String){
-        Toast.makeText(requireContext(), expression, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), expression, Toast.LENGTH_LONG).show()
     }
 
     private fun showWarning(){

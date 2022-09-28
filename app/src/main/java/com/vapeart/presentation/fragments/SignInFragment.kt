@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignInBinding
@@ -47,18 +45,21 @@ class SignInFragment : Fragment() {
         setTextChangeListeners()
         setCreateNewAccButtonListener()
         setSignInButtonListener()
-        observerRegister()
+        viewModelObserversRegister()
+        setForgotPasswordButtonListener()
     }
     
-    private fun observerRegister(){
+    private fun viewModelObserversRegister(){
         viewModel.isSuccess.observe(viewLifecycleOwner){
             if(it){
                 navigator.navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
                 navigator.viewVisibility(true)
-            } else {
-                showToast(getString(R.string.email_warning))
-                binding.progressBar.visibility = View.GONE
             }
+        }
+
+        viewModel.exceptionMessage.observe(viewLifecycleOwner){ message ->
+            if(message.isNotEmpty()) showToast(message)
+            binding.progressBar.visibility = View.GONE
         }
     }
 
@@ -101,8 +102,14 @@ class SignInFragment : Fragment() {
         }
     }
 
+    private fun setForgotPasswordButtonListener(){
+        binding.forgotPassword.setOnClickListener{
+            navigator.navigate(SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment())
+        }
+    }
+
     private fun showToast(expression: String){
-        Toast.makeText(requireContext(), expression, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), expression, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroyView() {
