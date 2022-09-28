@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignInBinding
 import com.vapeart.presentation.utils.Navigator
-import com.vapeart.presentation.utils.TextWatcherImpl
 import com.vapeart.presentation.viewmodels.SignInFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,14 +41,13 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setEmailEditText()
-        setTextChangeListeners()
         setCreateNewAccButtonListener()
         setSignInButtonListener()
-        viewModelObserversRegister()
+        registerViewModelObservers()
         setForgotPasswordButtonListener()
     }
     
-    private fun viewModelObserversRegister(){
+    private fun registerViewModelObservers(){
         viewModel.isSuccess.observe(viewLifecycleOwner){
             if(it){
                 navigator.navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
@@ -65,19 +63,6 @@ class SignInFragment : Fragment() {
 
     private fun setEmailEditText(){
         if(email.isNotBlank()) binding.emailEditText.setText(email)
-    }
-
-    private fun setTextChangeListeners(){
-        binding.emailEditText.addTextChangedListener(object: TextWatcherImpl(){
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                email = s.toString()
-            }
-        })
-        binding.passwordEditText.addTextChangedListener(object: TextWatcherImpl(){
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                password = s.toString()
-            }
-        })
     }
 
     private fun setCreateNewAccButtonListener(){
@@ -96,6 +81,8 @@ class SignInFragment : Fragment() {
 
     private fun setSignInButtonListener(){
         binding.signInButton.setOnClickListener {
+            email = binding.emailEditText.text.toString()
+            password = binding.passwordEditText.text.toString()
             if(viewModel.signIn(email,password))
                 binding.progressBar.visibility = View.VISIBLE
             else showWarning()
@@ -104,7 +91,8 @@ class SignInFragment : Fragment() {
 
     private fun setForgotPasswordButtonListener(){
         binding.forgotPassword.setOnClickListener{
-            navigator.navigate(SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment())
+            email = binding.emailEditText.text.toString()
+            navigator.navigate(SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment(email))
         }
     }
 
