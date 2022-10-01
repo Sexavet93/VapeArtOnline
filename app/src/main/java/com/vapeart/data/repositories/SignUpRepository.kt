@@ -10,11 +10,13 @@ class SignUpRepository @Inject constructor(private var firebaseAuth: FirebaseAut
 
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
-    fun createUser(email: String, password: String, callback: (Boolean) -> Unit){
+    fun createUser(email: String, password: String, callback: (Boolean,String) -> Unit){
         coroutineScope.launch {
             firebaseAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener{ task ->
-                    callback.invoke(task.isSuccessful)
+                .addOnCompleteListener { task ->
+                    task.exception?.message?.let { message ->
+                        callback.invoke(task.isSuccessful,message)
+                    } ?: callback.invoke(task.isSuccessful, "")
                 }
         }
     }

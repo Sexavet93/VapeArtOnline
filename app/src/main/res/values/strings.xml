@@ -19,7 +19,6 @@
     <string name="wrong_password">password must be greater than 6 characters</string>
     <string name="wrong_confirm_password">confirm password does not match</string>
     <string name="warning">Something went wrong</string>
-    <string name="email_warning">There is no user with this email, please create an account</string>
     <string name="registration_is_successful">Registration was successful, please login</string>
     <string name="category">Categories</string>
     <string name="devices">Devices</string>
@@ -59,4 +58,7 @@
     <string name="increase_items_quantity">Increase items quantity</string>
     <string name="reduce_items_quantity">Reduce items quantity</string>
     <string name="seller_phone">+994704030313</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="submit">Submit</string>
+    <string name="check_email">"Please check your email to reset password"</string>
 </resources>

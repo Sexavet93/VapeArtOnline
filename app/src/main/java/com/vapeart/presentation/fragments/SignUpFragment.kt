@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignUpBinding
 import com.vapeart.presentation.utils.Navigator
-import com.vapeart.presentation.utils.TextWatcherImpl
 import com.vapeart.presentation.viewmodels.SignUpFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,9 +41,8 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setEmailEditText()
-        setTextChangedListeners()
         setSignUpButtonListener()
-        setupLiveDataMonitoring()
+        registerViewModelObservers()
         setSignInButton()
     }
 
@@ -52,42 +50,30 @@ class SignUpFragment : Fragment() {
         if(email.isNotBlank()) binding.emailEditText.setText(email)
     }
 
-    private fun setTextChangedListeners(){
-        binding.emailEditText.addTextChangedListener(object: TextWatcherImpl(){
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                email = s.toString()
-            }
-        })
-        binding.passwordEditText.addTextChangedListener(object: TextWatcherImpl(){
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                password = s.toString()
-            }
-        })
-        binding.confirmPasswordEditText.addTextChangedListener(object: TextWatcherImpl(){
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                confirmPassword = s.toString()
-            }
-        })
-    }
-
     private fun setSignUpButtonListener(){
         binding.signUpButton.setOnClickListener {
+            binding.apply {
+                email = emailEditText.text.toString()
+                password = passwordEditText.text.toString()
+                confirmPassword = confirmPasswordEditText.text.toString()
+            }
             if(viewModel.signUp(email,password,confirmPassword))
                 binding.progressBar.visibility = View.VISIBLE
             else showWarning()
         }
     }
 
-    private fun setupLiveDataMonitoring(){
+    private fun registerViewModelObservers(){
         viewModel.isSuccess.observe(viewLifecycleOwner){ isSuccess ->
             if(isSuccess){
                 showToast(getString(R.string.registration_is_successful))
                 navigator
                     .navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment(email))
             }
-            else {
+
+            viewModel.exceptionMessage.observe(viewLifecycleOwner){ message ->
+                if(message.isNotEmpty()) showToast(message)
                 binding.progressBar.visibility = View.GONE
-                showToast(getString(R.string.warning))
             }
         }
     }
@@ -99,7 +85,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun showToast(expression: String){
-        Toast.makeText(requireContext(), expression, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), expression, Toast.LENGTH_LONG).show()
     }
 
     private fun showWarning(){

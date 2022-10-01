@@ -9,8 +9,9 @@ class SignUpFragmentViewModel @Inject constructor(private var signUpRepo: SignUp
 
     fun signUp(email: String, password: String, confirmPassword: String): Boolean {
         return if(isEmailValidate(email) && isPasswordValidate(password) && isConfirmPasswordValidate(password,confirmPassword)){
-            signUpRepo.createUser(email, password) {
-                _isSuccess.value = it
+            signUpRepo.createUser(email, password){ isSuccessful, message ->
+                _isSuccess.value = isSuccessful
+                _exceptionMessage.value = message
             }
             true
         } else false

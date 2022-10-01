@@ -1,5 +1,7 @@
 package com.vapeart.data.repositories
 
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,11 +16,24 @@ class SignInRepository @Inject constructor(private var firebaseAuth: FirebaseAut
         return firebaseAuth.currentUser != null
     }
 
-    fun signIn(email: String ,password: String, callback: (Boolean) -> Unit){
+    fun signIn(email: String ,password: String, callback: (Boolean, String) -> Unit){
         coroutineScope.launch {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-                    callback.invoke(task.isSuccessful)
+                    task.exception?.message?.let { message ->
+                        callback.invoke(task.isSuccessful,message)
+                    } ?: callback.invoke(task.isSuccessful, "")
+                }
+        }
+    }
+
+    fun sendPasswordResetEmail(email:String, callback: (Boolean, String) -> Unit){
+        coroutineScope.launch {
+            firebaseAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener { task ->
+                    task.exception?.message?.let { message ->
+                        callback.invoke(task.isSuccessful,message)
+                    } ?: callback.invoke(task.isSuccessful, "")
                 }
         }
     }

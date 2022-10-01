@@ -6,14 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignInBinding
 import com.vapeart.presentation.utils.Navigator
-import com.vapeart.presentation.utils.TextWatcherImpl
 import com.vapeart.presentation.viewmodels.SignInFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,39 +41,28 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setEmailEditText()
-        setTextChangeListeners()
         setCreateNewAccButtonListener()
         setSignInButtonListener()
-        observerRegister()
+        registerViewModelObservers()
+        setForgotPasswordButtonListener()
     }
     
-    private fun observerRegister(){
+    private fun registerViewModelObservers(){
         viewModel.isSuccess.observe(viewLifecycleOwner){
             if(it){
                 navigator.navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
                 navigator.viewVisibility(true)
-            } else {
-                showToast(getString(R.string.email_warning))
-                binding.progressBar.visibility = View.GONE
             }
+        }
+
+        viewModel.exceptionMessage.observe(viewLifecycleOwner){ message ->
+            if(message.isNotEmpty()) showToast(message)
+            binding.progressBar.visibility = View.GONE
         }
     }
 
     private fun setEmailEditText(){
         if(email.isNotBlank()) binding.emailEditText.setText(email)
-    }
-
-    private fun setTextChangeListeners(){
-        binding.emailEditText.addTextChangedListener(object: TextWatcherImpl(){
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                email = s.toString()
-            }
-        })
-        binding.passwordEditText.addTextChangedListener(object: TextWatcherImpl(){
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                password = s.toString()
-            }
-        })
     }
 
     private fun setCreateNewAccButtonListener(){
@@ -95,14 +81,23 @@ class SignInFragment : Fragment() {
 
     private fun setSignInButtonListener(){
         binding.signInButton.setOnClickListener {
+            email = binding.emailEditText.text.toString()
+            password = binding.passwordEditText.text.toString()
             if(viewModel.signIn(email,password))
                 binding.progressBar.visibility = View.VISIBLE
             else showWarning()
         }
     }
 
+    private fun setForgotPasswordButtonListener(){
+        binding.forgotPassword.setOnClickListener{
+            email = binding.emailEditText.text.toString()
+            navigator.navigate(SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment(email))
+        }
+    }
+
     private fun showToast(expression: String){
-        Toast.makeText(requireContext(), expression, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), expression, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroyView() {

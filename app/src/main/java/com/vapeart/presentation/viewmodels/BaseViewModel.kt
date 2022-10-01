@@ -9,6 +9,10 @@ import javax.inject.Inject
 
 abstract class BaseViewModel (): ViewModel() {
 
+    protected val _exceptionMessage: MutableLiveData<String> = MutableLiveData()
+    val exceptionMessage: LiveData<String>
+        get() = _exceptionMessage
+
     protected val _isSuccess: MutableLiveData<Boolean> = MutableLiveData()
     val isSuccess: LiveData<Boolean>
         get() = _isSuccess
