@@ -57,7 +57,7 @@ class WishListAdapter(
 
         fun setOnAddToCartButtonListener(item: FavoriteItem) {
             binding.addToCartButton.setOnClickListener {
-                var itemQuantity: Int = try {
+                val itemQuantity: Int = try {
                     binding.itemAmountTextView.text.toString().toInt()
                 } catch (exception: Exception) {
                     0
