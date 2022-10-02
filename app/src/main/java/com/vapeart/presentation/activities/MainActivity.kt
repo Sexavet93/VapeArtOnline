@@ -9,11 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
-import androidx.navigation.NavController
-import androidx.navigation.NavDirections
-import androidx.navigation.NavHost
-import androidx.navigation.navOptions
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.*
 import com.vapeart.R
 import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.ActivityMainBinding
@@ -115,19 +111,14 @@ class MainActivity: AppCompatActivity(), Navigator {
     }
 
     private fun navigateWithId(id: Int, query: String) {
-        navController.navigate(id,
-            bundleOf("query" to query),
+        navController.navigate(id, bundleOf("query" to query),
             navOptions { popUpTo(id){inclusive = true}})
         binding.drawerLayout.closeDrawers()
     }
 
     private fun navigateWithId(id: Int) {
         val popUpToId = navController.currentDestination?.id ?: 0
-        navController.navigate(
-            id,
-            null,
-            navOptions { popUpTo(popUpToId) { inclusive = true } }
-        )
+        navController.navigate(id, null, navOptions { popUpTo(popUpToId) { inclusive = true } })
         binding.drawerLayout.closeDrawers()
     }
 
@@ -169,7 +160,6 @@ class MainActivity: AppCompatActivity(), Navigator {
     private fun navControllerInitializer() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHost
         navController = navHost.navController
-        binding.bottomNavigation.setupWithNavController(navController)
     }
 
     private fun initializePopUpMenu() {
@@ -179,7 +169,8 @@ class MainActivity: AppCompatActivity(), Navigator {
             when (it.toString()) {
                 SIGN_OUT_BUTTON -> {
                     viewModel.signOut()
-                    navigate(HomeFragmentDirections.actionHomeFragmentToSignInFragment(""))
+                    navController.navigate(R.id.signInFragment,null,
+                        NavOptions.Builder().setPopUpTo(navController.graph.startDestinationId, true).build())
                 }
             }
             return@setOnMenuItemClickListener true
