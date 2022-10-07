@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.CollectionReference
-import com.vapeart.data.repositories.FirestoreRepository
+import com.vapeart.data.repositories.FirestoreRepositoryImpl
 import com.vapeart.domain.Item
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchFragmentViewModel @Inject constructor(firebaseRepo: FirestoreRepository): ViewModel() {
+class SearchFragmentViewModel @Inject constructor(firebaseRepo: FirestoreRepositoryImpl): ViewModel() {
 
     private val referencesList: List<CollectionReference> = firebaseRepo.getReferencesList()
     private val _requestItemList: MutableLiveData<List<Item>> = MutableLiveData()

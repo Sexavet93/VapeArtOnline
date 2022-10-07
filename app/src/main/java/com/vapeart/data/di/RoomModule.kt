@@ -2,7 +2,6 @@ package com.vapeart.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.vapeart.data.repositories.RoomRepository
 import com.vapeart.data.room.ROOM_DB_NAME
 import com.vapeart.data.room.RoomDB
 import com.vapeart.data.room.RoomDao

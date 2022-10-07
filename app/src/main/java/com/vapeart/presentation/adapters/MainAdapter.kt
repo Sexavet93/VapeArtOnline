@@ -19,8 +19,13 @@ import com.vapeart.presentation.utils.GlideCustomTarget
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 
-class MainAdapter(private val navigator: Navigator):
-    ListAdapter<Item, MainAdapter.MainViewHolder>(DiffCallbacks.mainAdapterDiffCallback) {
+class MainAdapter(private val navigator: Navigator, private var itemList: List<Item> = emptyList())
+    : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+
+    fun setList(list: List<Item>){
+        itemList = list
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.MainViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -29,7 +34,7 @@ class MainAdapter(private val navigator: Navigator):
     }
 
     override fun onBindViewHolder(holder: MainAdapter.MainViewHolder, position: Int) {
-        val item = currentList[position]
+        val item = itemList[position]
         holder.binding.apply {
             Glide.with(root).asBitmap().load(item.imageUri).into(object: GlideCustomTarget<Bitmap>(){
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
@@ -47,9 +52,14 @@ class MainAdapter(private val navigator: Navigator):
         holder.setOnClickListener(item)
     }
 
+    override fun getItemCount() = itemList.size
+
     override fun onViewRecycled(holder: MainViewHolder) {
-        holder.binding.progressBar.visibility = View.VISIBLE
-        holder.binding.priceGroup.visibility = View.GONE
+        holder.binding.apply {
+            itemImage.setImageDrawable(null)
+            progressBar.visibility = View.VISIBLE
+            priceGroup.visibility = View.GONE
+        }
     }
 
     inner class MainViewHolder(val binding: MainAdapterItemLayoutBinding): RecyclerView.ViewHolder(binding.root){

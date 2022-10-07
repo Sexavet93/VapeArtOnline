@@ -1,16 +1,15 @@
 package com.vapeart.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vapeart.data.repositories.RoomRepository
+import com.vapeart.data.repositories.RoomRepositoryImpl
 import com.vapeart.data.room.FavoriteItem
 import com.vapeart.data.room.SelectedItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsFragmentViewModel @Inject constructor(private var roomRepo: RoomRepository): ViewModel() {
+class DetailsFragmentViewModel @Inject constructor(private var roomRepo: RoomRepositoryImpl): ViewModel() {
 
     lateinit var favoriteItemLiveData: LiveData<FavoriteItem>
     lateinit var selectedItemLiveData: LiveData<SelectedItem>
