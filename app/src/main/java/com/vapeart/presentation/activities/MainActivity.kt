@@ -9,20 +9,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
-import androidx.navigation.*
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.NavHost
+import androidx.navigation.navOptions
 import com.vapeart.R
 import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.ActivityMainBinding
 import com.vapeart.presentation.fragments.HomeFragmentDirections
 import com.vapeart.presentation.utils.DeviceCategory
 import com.vapeart.presentation.utils.Navigator
+import com.vapeart.presentation.utils.ViewsManager
 import com.vapeart.presentation.viewmodels.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val SIGN_OUT_BUTTON = "Sign Out"
 
 @AndroidEntryPoint
-class MainActivity: AppCompatActivity(), Navigator {
+class MainActivity: AppCompatActivity(), Navigator, ViewsManager{
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainActivityViewModel by viewModels()
@@ -124,15 +129,18 @@ class MainActivity: AppCompatActivity(), Navigator {
 
     private fun setViewModelObserver() {
         viewModel.selectedItemLiveData.observe(this) {
-            setSelectedItemCount(it)
+            cartIndicator(it)
         }
     }
 
     private fun checkRegisteredUser() {
         if (!viewModel.isUserRegistered()) {
             navigate(HomeFragmentDirections.actionHomeFragmentToSignInFragment())
-            viewVisibility(false)
-        } else viewVisibility(true)
+            drawerLayoutLock(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            toolBarAndBottomNavigationBarVisibility(false)
+        } else {
+            toolBarAndBottomNavigationBarVisibility(true)
+        }
     }
 
     override fun navigate(direction: NavDirections) {
@@ -143,7 +151,7 @@ class MainActivity: AppCompatActivity(), Navigator {
         navController.navigateUp()
     }
 
-    override fun viewVisibility(isVisible: Boolean) {
+    override fun toolBarAndBottomNavigationBarVisibility(isVisible: Boolean) {
         if (isVisible) {
             binding.apply {
                 bottomNavigation.visibility = View.VISIBLE
@@ -169,26 +177,32 @@ class MainActivity: AppCompatActivity(), Navigator {
             when (it.toString()) {
                 SIGN_OUT_BUTTON -> {
                     viewModel.signOut()
-                    navController.navigate(R.id.signInFragment,null,
-                        NavOptions.Builder().setPopUpTo(navController.graph.startDestinationId, true).build())
+                    navigateWithId(R.id.signInFragment)
+                    drawerLayoutLock(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
             }
             return@setOnMenuItemClickListener true
         }
     }
 
-    private fun setSelectedItemCount(list: List<SelectedItem>) {
+    private fun cartIndicator(list: List<SelectedItem>) {
         if (list.isNotEmpty()) {
-            binding.selectedItemCount.visibility = View.VISIBLE
+            binding.cartIndicator.visibility = View.VISIBLE
         } else {
-            binding.selectedItemCount.visibility = View.GONE
+            binding.cartIndicator.visibility = View.GONE
         }
     }
 
     override fun onBackPressed() {
         if (binding.drawerLayout.isOpen)
             binding.drawerLayout.closeDrawers()
+        if(navController.currentDestination?.id == R.id.signInFragment)
+            finish()
         else super.onBackPressed()
+    }
+
+    override fun drawerLayoutLock(lockMode: Int) {
+        binding.drawerLayout.setDrawerLockMode(lockMode)
     }
 
 }

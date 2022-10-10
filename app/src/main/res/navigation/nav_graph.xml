@@ -48,34 +48,37 @@
         android:id="@+id/signInFragment"
         android:name="com.vapeart.presentation.fragments.SignInFragment"
         android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/signInFragment"
-            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"/>
+            app:popExitAnim="@anim/slide_out"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"/>
+            app:popExitAnim="@anim/slide_out" />
         <action
             android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"/>
+            app:popExitAnim="@anim/slide_out" />
         <argument
             android:name="email"
-            app:argType="string"
-            android:defaultValue='' />
+            android:defaultValue=''
+            app:argType="string" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="vapeart://signin" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -107,7 +110,7 @@
         tools:layout="@layout/fragment_details" >
         <argument
             android:name="item"
-            app:argType="com.vapeart.domain.Item" />
+            app:argType="com.vapeart.domain.models.Item" />
     </fragment>
     <fragment
         android:id="@+id/itemsReviewFragment"

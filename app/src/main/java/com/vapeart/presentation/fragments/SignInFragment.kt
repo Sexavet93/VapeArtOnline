@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.vapeart.R
 import com.vapeart.databinding.FragmentSignInBinding
 import com.vapeart.presentation.utils.Navigator
+import com.vapeart.presentation.utils.ViewsManager
 import com.vapeart.presentation.viewmodels.SignInFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +23,7 @@ class SignInFragment : Fragment() {
     private val binding: FragmentSignInBinding
         get() = _binding ?: throw RuntimeException("Field binding in SignInFragment == null")
     private lateinit var navigator: Navigator
+    private lateinit var viewsManager: ViewsManager
     private lateinit var email: String
     private var password: String = ""
     private val arguments: SignInFragmentArgs by navArgs()
@@ -30,7 +33,8 @@ class SignInFragment : Fragment() {
         super.onCreate(savedInstanceState)
         email = arguments.email
         navigator = requireActivity() as Navigator
-        navigator.viewVisibility(false)
+        viewsManager = requireActivity() as ViewsManager
+        viewsManager.toolBarAndBottomNavigationBarVisibility(false)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -51,7 +55,8 @@ class SignInFragment : Fragment() {
         viewModel.isSuccess.observe(viewLifecycleOwner){
             if(it){
                 navigator.navigate(SignInFragmentDirections.actionSignInFragmentToHomeFragment())
-                navigator.viewVisibility(true)
+                viewsManager.toolBarAndBottomNavigationBarVisibility(true)
+                viewsManager.drawerLayoutLock(DrawerLayout.LOCK_MODE_UNLOCKED)
             }
         }
 

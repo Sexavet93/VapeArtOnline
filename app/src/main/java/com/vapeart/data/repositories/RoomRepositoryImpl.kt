@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.vapeart.data.room.FavoriteItem
 import com.vapeart.data.room.RoomDao
 import com.vapeart.data.room.SelectedItem
-import com.vapeart.domain.RoomRepository
+import com.vapeart.domain.repositories.RoomRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

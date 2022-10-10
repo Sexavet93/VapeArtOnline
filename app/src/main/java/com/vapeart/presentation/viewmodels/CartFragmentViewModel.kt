@@ -3,11 +3,11 @@ package com.vapeart.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.vapeart.data.room.SelectedItem
-import com.vapeart.domain.RoomRepository
-import com.vapeart.domain.local_db_usecases.selected_items_usecases.AddSelectedItemUseCase
-import com.vapeart.domain.local_db_usecases.selected_items_usecases.DeleteSelectedItemUseCase
-import com.vapeart.domain.local_db_usecases.selected_items_usecases.DeleteSelectedItemsTableUseCase
-import com.vapeart.domain.local_db_usecases.selected_items_usecases.GetSelectedItemsUseCase
+import com.vapeart.domain.repositories.RoomRepository
+import com.vapeart.domain.usecases.local_db_usecases.selected_items_usecases.AddSelectedItemUseCase
+import com.vapeart.domain.usecases.local_db_usecases.selected_items_usecases.DeleteSelectedItemUseCase
+import com.vapeart.domain.usecases.local_db_usecases.selected_items_usecases.DeleteSelectedItemsTableUseCase
+import com.vapeart.domain.usecases.local_db_usecases.selected_items_usecases.GetSelectedItemsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

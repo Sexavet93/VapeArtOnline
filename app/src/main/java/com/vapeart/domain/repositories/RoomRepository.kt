@@ -1,4 +1,4 @@
-package com.vapeart.domain
+package com.vapeart.domain.repositories
 
 import androidx.lifecycle.LiveData
 import com.vapeart.data.room.FavoriteItem

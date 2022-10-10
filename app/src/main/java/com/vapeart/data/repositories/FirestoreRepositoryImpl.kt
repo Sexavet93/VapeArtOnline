@@ -1,36 +1,37 @@
 package com.vapeart.data.repositories
 
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.vapeart.domain.FirestoreRepository
-import com.vapeart.domain.Item
+import com.vapeart.domain.repositories.FirestoreRepository
+import com.vapeart.domain.models.Item
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FirestoreRepositoryImpl @Inject constructor(private var firebaseCloud: FirebaseFirestore)
-    :FirestoreRepository{
+    : FirestoreRepository {
 
-    private val referencesList = listOf(
-        firebaseCloud.collection("devices"),
-        firebaseCloud.collection("atomizers"),
-        firebaseCloud.collection("cartridges_and_coils"),
-        firebaseCloud.collection("disposable_devices"),
-        firebaseCloud.collection("regular_liquids"),
-        firebaseCloud.collection("salt_nicotine_liquids")
+    private val referencesList: List<CollectionReference> = listOf(
+        firebaseCloud.collection(DEVICES_PATH),
+        firebaseCloud.collection(ATOMIZERS_PATH),
+        firebaseCloud.collection(CARTRIDGES_PATH),
+        firebaseCloud.collection(DISPOSABLE_DEVICES_PATH),
+        firebaseCloud.collection(REGULAR_LIQUIDS_PATH),
+        firebaseCloud.collection(SALT_NICOTINE_PATH)
     )
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
 
-    fun getReferencesList() = referencesList
+    fun getReferencesListMet() = referencesList
 
     override fun getBestSellers(): MutableLiveData<List<Item>> {
         val bestSellersList: MutableList<Item> = mutableListOf()
         val liveData = MutableLiveData<List<Item>>()
         for (reference in referencesList) {
             coroutineScope.launch {
-                reference.whereGreaterThan("saleQuantityPerMonth", 7).get()
+                reference.whereGreaterThan(BEST_SELLERS_SORT_KEY, BEST_SELLERS_MIN_VALUE).get()
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             for (item in task.result) {
@@ -52,7 +53,7 @@ class FirestoreRepositoryImpl @Inject constructor(private var firebaseCloud: Fir
         val liveData = MutableLiveData<List<Item>>()
         for (reference in referencesList) {
             coroutineScope.launch {
-                reference.whereEqualTo("itemNew", true).get().addOnCompleteListener { task ->
+                reference.whereEqualTo(NEW_ITEM_SORT_KEY, IS_NEW_ITEM).get().addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         for (item in task.result) {
                             val myItem = item.toObject(Item::class.java)
@@ -73,7 +74,7 @@ class FirestoreRepositoryImpl @Inject constructor(private var firebaseCloud: Fir
         val liveData = MutableLiveData<List<Item>>()
         for (reference in referencesList) {
             coroutineScope.launch {
-                reference.whereNotEqualTo("oldPrice", "0").get().addOnCompleteListener { task ->
+                reference.whereNotEqualTo(DISCOUNT_SORT_KEY, OLD_PRICE_DEFAULT_VALUE).get().addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         for (item in task.result) {
                             val myItem = item.toObject(Item::class.java)
@@ -90,7 +91,7 @@ class FirestoreRepositoryImpl @Inject constructor(private var firebaseCloud: Fir
     }
 
     override fun getQueryItemsList(query: String): MutableLiveData<List<Item>> {
-        val queryLiveData: MutableLiveData<List<Item>> = MutableLiveData()
+        val liveData: MutableLiveData<List<Item>> = MutableLiveData()
         val itemList = mutableListOf<Item>()
         coroutineScope.launch {
             firebaseCloud.collection(query).get().addOnCompleteListener { task ->
@@ -101,10 +102,51 @@ class FirestoreRepositoryImpl @Inject constructor(private var firebaseCloud: Fir
                         item.description = item.description.replace("\\n", "\n")
                         itemList.add(item)
                     }
-                    queryLiveData.postValue(itemList)
+                    liveData.postValue(itemList)
                 }
             }
         }
-        return queryLiveData
+        return liveData
     }
+
+    override fun getSearchItems(query: String, callback: (List<Item>) -> Unit){
+        val regex = query.toRegex(RegexOption.IGNORE_CASE)
+        val itemList = mutableListOf<Item>()
+        referencesList.forEach{ reference ->
+            coroutineScope.launch {
+                reference.get().addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        task.result.forEach {
+                            coroutineScope.launch {
+                                val name = it.data["name"] as String
+                                if(regex.containsMatchIn(name)){
+                                    val item = it.toObject(Item::class.java)
+                                    item.id = it.id
+                                    item.description = item.description.replace("\\n", "\n")
+                                    itemList.add(item)
+                                    callback.invoke(itemList)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    companion object{
+         const val DEVICES_PATH = "devices"
+         const val ATOMIZERS_PATH = "atomizers"
+         const val CARTRIDGES_PATH = "cartridges_and_coils"
+         const val DISPOSABLE_DEVICES_PATH = "disposable_devices"
+         const val REGULAR_LIQUIDS_PATH = "regular_liquids"
+         const val SALT_NICOTINE_PATH = "salt_nicotine_liquid"
+         const val BEST_SELLERS_SORT_KEY = "saleQuantityPerMonth"
+         const val NEW_ITEM_SORT_KEY = "itemNew"
+         const val DISCOUNT_SORT_KEY = "oldPrice"
+         const val OLD_PRICE_DEFAULT_VALUE = "0"
+         const val BEST_SELLERS_MIN_VALUE = 7
+         const val IS_NEW_ITEM = true
+    }
+
 }

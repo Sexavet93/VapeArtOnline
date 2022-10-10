@@ -2,11 +2,11 @@ package com.vapeart.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.vapeart.domain.FirestoreRepository
-import com.vapeart.domain.Item
-import com.vapeart.domain.remote_db_usecases.GetBestSellersUseCase
-import com.vapeart.domain.remote_db_usecases.GetDiscountsUseCase
-import com.vapeart.domain.remote_db_usecases.GetNewItemsUseCase
+import com.vapeart.domain.repositories.FirestoreRepository
+import com.vapeart.domain.models.Item
+import com.vapeart.domain.usecases.remote_db_usecases.GetBestSellersUseCase
+import com.vapeart.domain.usecases.remote_db_usecases.GetDiscountsUseCase
+import com.vapeart.domain.usecases.remote_db_usecases.GetNewItemsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

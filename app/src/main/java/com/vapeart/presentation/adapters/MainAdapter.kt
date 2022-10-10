@@ -1,23 +1,17 @@
 package com.vapeart.presentation.adapters
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.transition.Transition
-import com.vapeart.R
 import com.vapeart.databinding.MainAdapterItemLayoutBinding
-import com.vapeart.domain.Item
+import com.vapeart.domain.models.Item
 import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.fragments.HomeFragmentDirections
-import com.vapeart.presentation.utils.DiffCallbacks
 import com.vapeart.presentation.utils.GlideCustomTarget
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 
 class MainAdapter(private val navigator: Navigator, private var itemList: List<Item> = emptyList())
     : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {

@@ -1,8 +1,8 @@
-package com.vapeart.domain.remote_db_usecases
+package com.vapeart.domain.usecases.remote_db_usecases
 
 import androidx.lifecycle.MutableLiveData
-import com.vapeart.domain.FirestoreRepository
-import com.vapeart.domain.Item
+import com.vapeart.domain.repositories.FirestoreRepository
+import com.vapeart.domain.models.Item
 
 class GetBestSellersUseCase(private val firestoreRepo: FirestoreRepository) {
 

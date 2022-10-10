@@ -1,6 +1,7 @@
-package com.vapeart.domain
+package com.vapeart.domain.repositories
 
 import androidx.lifecycle.MutableLiveData
+import com.vapeart.domain.models.Item
 
 interface FirestoreRepository {
 
@@ -11,4 +12,6 @@ interface FirestoreRepository {
     fun getDiscounts(): MutableLiveData<List<Item>>
 
     fun getQueryItemsList(query: String): MutableLiveData<List<Item>>
+
+    fun getSearchItems(query: String, callback:(List<Item>) -> Unit)
 }
