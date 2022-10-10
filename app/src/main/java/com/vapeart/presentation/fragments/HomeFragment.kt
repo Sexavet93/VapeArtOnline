@@ -77,15 +77,15 @@ class HomeFragment : Fragment() {
 
     private fun setViewModelObservers(){
         viewModel.bestSellersResponseLiveData.observe(viewLifecycleOwner){
-            adapterForBestSellersRv.submitList(it)
+            adapterForBestSellersRv.setList(it)
             progressBarVisibility()
         }
         viewModel.newItemsResponseLiveData.observe(viewLifecycleOwner){
-            adapterForNewItemRv.submitList(it)
+            adapterForNewItemRv.setList(it)
             progressBarVisibility()
         }
         viewModel.discountsResponseLiveData.observe(viewLifecycleOwner){
-            adapterForDiscountsRv.submitList(it)
+            adapterForDiscountsRv.setList(it)
             progressBarVisibility()
         }
     }

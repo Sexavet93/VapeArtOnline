@@ -8,6 +8,4 @@ interface Navigator {
 
     fun navigateUp()
 
-    fun viewVisibility(isVisible: Boolean)
-
 }

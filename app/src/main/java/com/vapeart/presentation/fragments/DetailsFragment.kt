@@ -16,7 +16,7 @@ import com.vapeart.R
 import com.vapeart.data.room.FavoriteItem
 import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.FragmentDetailsBinding
-import com.vapeart.domain.Item
+import com.vapeart.domain.models.Item
 import com.vapeart.presentation.utils.Assistant
 import com.vapeart.presentation.viewmodels.DetailsFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint

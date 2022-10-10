@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.transition.Transition
 import com.vapeart.databinding.ItemReviewLayoutBinding
-import com.vapeart.domain.Item
+import com.vapeart.domain.models.Item
 import com.vapeart.presentation.fragments.SearchFragmentDirections
 import com.vapeart.presentation.utils.DiffCallbacks
 import com.vapeart.presentation.utils.GlideCustomTarget

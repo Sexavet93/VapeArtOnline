@@ -1,17 +1,19 @@
 package com.vapeart.presentation.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.vapeart.data.repositories.SignInRepository
+import com.vapeart.domain.repositories.SignInRepository
+import com.vapeart.domain.usecases.sign_in_usecases.SignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInFragmentViewModel @Inject constructor(private var firebaseAuthRepo: SignInRepository) : BaseViewModel() {
+class SignInFragmentViewModel @Inject constructor(signInRepo: SignInRepository)
+    : BaseViewModel() {
+
+    private val signInUseCase: SignInUseCase = SignInUseCase(signInRepo)
 
     fun signIn(email: String, password: String): Boolean {
         return if(isEmailValidate(email) && isPasswordValidate(password)){
-            firebaseAuthRepo.signIn(email, password) { isSuccessful, message ->
+            signInUseCase.signIn(email, password) { isSuccessful, message ->
                 _isSuccess.value = isSuccessful
                 _exceptionMessage.value = message
             }

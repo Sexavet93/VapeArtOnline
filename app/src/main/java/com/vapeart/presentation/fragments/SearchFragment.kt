@@ -7,11 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vapeart.databinding.FragmentSearchBinding
-import com.vapeart.domain.Item
+import com.vapeart.domain.models.Item
 import com.vapeart.presentation.adapters.SearchFragmentAdapter
 import com.vapeart.presentation.utils.Navigator
 import com.vapeart.presentation.utils.OnQueryTextListenerImpl
@@ -61,7 +60,7 @@ class SearchFragment : Fragment() {
                     itemList = emptyList()
                     adapter.submitList(itemList)
                     binding.progressBar.visibility = View.VISIBLE
-                    query?.let {viewModel.getRequestItems(it)}
+                    query?.let {viewModel.getSearchItems(it)}
                     clearFocus()
                     onActionViewCollapsed()
                     setQuery(query,false)

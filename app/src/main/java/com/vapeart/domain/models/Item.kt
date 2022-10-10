@@ -1,4 +1,4 @@
-package com.vapeart.domain
+package com.vapeart.domain.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

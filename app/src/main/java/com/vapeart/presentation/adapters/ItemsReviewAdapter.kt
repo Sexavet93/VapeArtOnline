@@ -1,6 +1,5 @@
 package com.vapeart.presentation.adapters
 
-import android.app.Notification
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.transition.Transition
-import com.vapeart.R
 import com.vapeart.databinding.ItemReviewLayoutBinding
-import com.vapeart.domain.Item
+import com.vapeart.domain.models.Item
 import com.vapeart.presentation.fragments.ItemsReviewFragmentDirections
 import com.vapeart.presentation.utils.GlideCustomTarget
 import com.vapeart.presentation.utils.Navigator

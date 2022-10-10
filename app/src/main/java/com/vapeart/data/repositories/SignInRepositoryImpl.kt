@@ -1,22 +1,22 @@
 package com.vapeart.data.repositories
 
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.vapeart.domain.repositories.SignInRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SignInRepository @Inject constructor(private var firebaseAuth: FirebaseAuth) {
+class SignInRepositoryImpl @Inject constructor(private var firebaseAuth: FirebaseAuth)
+    :SignInRepository{
 
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
-    fun isUserRegistered(): Boolean{
+    override fun isUserRegistered(): Boolean{
         return firebaseAuth.currentUser != null
     }
 
-    fun signIn(email: String ,password: String, callback: (Boolean, String) -> Unit){
+    override fun signIn(email: String, password: String, callback: (Boolean, String) -> Unit){
         coroutineScope.launch {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
@@ -27,7 +27,7 @@ class SignInRepository @Inject constructor(private var firebaseAuth: FirebaseAut
         }
     }
 
-    fun sendPasswordResetEmail(email:String, callback: (Boolean, String) -> Unit){
+    override fun sendPasswordResetEmail(email:String, callback: (Boolean, String) -> Unit){
         coroutineScope.launch {
             firebaseAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
@@ -36,5 +36,9 @@ class SignInRepository @Inject constructor(private var firebaseAuth: FirebaseAut
                     } ?: callback.invoke(task.isSuccessful, "")
                 }
         }
+    }
+
+    override fun signOut() {
+        firebaseAuth.signOut()
     }
 }
