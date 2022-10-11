@@ -5,7 +5,7 @@ import com.vapeart.domain.repositories.RoomRepository
 
 class AddSelectedItemUseCase(private val roomRepo: RoomRepository) {
 
-    fun addSelectedItem(item: SelectedItem){
+    operator fun invoke(item: SelectedItem){
         roomRepo.addSelectedItem(item)
     }
 }

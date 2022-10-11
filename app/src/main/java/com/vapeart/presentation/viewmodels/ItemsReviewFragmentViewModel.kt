@@ -10,7 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ItemsReviewFragmentViewModel @Inject constructor(private val firestoreRepo: FirestoreRepository)
+class ItemsReviewFragmentViewModel @Inject constructor(firestoreRepo: FirestoreRepository)
     : ViewModel() {
 
     private val getQueryItemsUseCase: GetQueryItemsUseCase = GetQueryItemsUseCase(firestoreRepo)
@@ -19,6 +19,6 @@ class ItemsReviewFragmentViewModel @Inject constructor(private val firestoreRepo
         get() = _queryLiveData
 
     fun getQueryItems(query: String){
-        _queryLiveData = getQueryItemsUseCase.getQueryItemsList(query)
+        _queryLiveData = getQueryItemsUseCase(query)
     }
 }

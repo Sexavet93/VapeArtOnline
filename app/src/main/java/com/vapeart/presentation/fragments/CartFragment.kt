@@ -70,10 +70,8 @@ class CartFragment : Fragment() {
                     bottomButtons.visibility = View.GONE
                 }
             }
-            if(it.size != itemsList.size){
-                adapter.submitList(it)
-                itemsList = it
-            }
+            itemsList = it.sortedByDescending { item -> item.amount }
+            adapter.submitList(itemsList)
         }
     }
 

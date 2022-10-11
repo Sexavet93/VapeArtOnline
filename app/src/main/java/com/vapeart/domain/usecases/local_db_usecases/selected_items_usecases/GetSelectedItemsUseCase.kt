@@ -6,7 +6,7 @@ import com.vapeart.domain.repositories.RoomRepository
 
 class GetSelectedItemsUseCase(private val roomRepo: RoomRepository) {
 
-    fun getSelectedItems(): LiveData<List<SelectedItem>>{
+    operator fun invoke(): LiveData<List<SelectedItem>>{
         return roomRepo.getSelectedItems()
     }
 }

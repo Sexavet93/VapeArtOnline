@@ -6,7 +6,7 @@ import com.vapeart.domain.models.Item
 
 class GetDiscountsUseCase(private val firestoreRepo: FirestoreRepository) {
 
-    fun getDiscounts(): MutableLiveData<List<Item>>{
+    operator fun invoke(): MutableLiveData<List<Item>>{
         return firestoreRepo.getDiscounts()
     }
 }

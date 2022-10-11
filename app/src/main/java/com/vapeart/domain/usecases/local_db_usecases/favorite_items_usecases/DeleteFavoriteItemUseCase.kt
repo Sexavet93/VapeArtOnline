@@ -5,7 +5,7 @@ import com.vapeart.domain.repositories.RoomRepository
 
 class DeleteFavoriteItemUseCase(private val roomRepo: RoomRepository) {
 
-    fun deleteFavoriteItem(item: FavoriteItem){
+    operator fun invoke(item: FavoriteItem){
         roomRepo.deleteFavoriteItem(item)
     }
 }

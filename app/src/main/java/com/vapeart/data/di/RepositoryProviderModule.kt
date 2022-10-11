@@ -20,18 +20,18 @@ interface RepositoryProviderModule {
 
     @Binds
     @Singleton
-    abstract fun getFirestoreRepository(repositoryImpl: FirestoreRepositoryImpl): FirestoreRepository
+    fun getFirestoreRepository(repositoryImpl: FirestoreRepositoryImpl): FirestoreRepository
 
     @Binds
     @Singleton
-    abstract fun getRoomRepository(repositoryImpl: RoomRepositoryImpl): RoomRepository
+    fun getRoomRepository(repositoryImpl: RoomRepositoryImpl): RoomRepository
 
     @Binds
     @Singleton
-    abstract fun getSignInRepository(repositoryImpl: SignInRepositoryImpl): SignInRepository
+    fun getSignInRepository(repositoryImpl: SignInRepositoryImpl): SignInRepository
 
     @Binds
     @Singleton
-    abstract fun getSignUpRepository(repositoryImpl: SignUpRepositoryImpl): SignUpRepository
+    fun getSignUpRepository(repositoryImpl: SignUpRepositoryImpl): SignUpRepository
 
 }

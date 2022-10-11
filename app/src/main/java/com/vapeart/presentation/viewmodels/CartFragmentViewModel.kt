@@ -12,24 +12,28 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class CartFragmentViewModel @Inject constructor(private var roomRepository: RoomRepository): ViewModel() {
+class CartFragmentViewModel @Inject constructor(roomRepository: RoomRepository): ViewModel() {
 
     private val getSelectedItemsUseCase: GetSelectedItemsUseCase = GetSelectedItemsUseCase(roomRepository)
     private val deleteSelectedItemUseCase: DeleteSelectedItemUseCase = DeleteSelectedItemUseCase(roomRepository)
     private val addSelectedItemUseCase: AddSelectedItemUseCase = AddSelectedItemUseCase(roomRepository)
     private val deleteSelectedItemsTableUseCase: DeleteSelectedItemsTableUseCase = DeleteSelectedItemsTableUseCase(roomRepository)
 
-    val selectedItemsLiveData: LiveData<List<SelectedItem>> = getSelectedItemsUseCase.getSelectedItems()
+    val selectedItemsLiveData: LiveData<List<SelectedItem>> = getSelectedItemsUseCase()
 
     fun deleteSelectedItem(item: SelectedItem){
-        deleteSelectedItemUseCase.deleteSelectedItem(item)
+        deleteSelectedItemUseCase(item)
     }
 
     fun addSelectedItem(item: SelectedItem){
-        addSelectedItemUseCase.addSelectedItem(item)
+        addSelectedItemUseCase(item)
     }
 
     fun deleteAllItems(){
-        deleteSelectedItemsTableUseCase.deleteTable()
+        deleteSelectedItemsTableUseCase()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
     }
 }

@@ -17,8 +17,8 @@ class HomeFragmentViewModel @Inject constructor(firestoreRepo: FirestoreReposito
     private val getNewItemsUseCase: GetNewItemsUseCase = GetNewItemsUseCase(firestoreRepo)
     private val getDiscountsUseCase: GetDiscountsUseCase = GetDiscountsUseCase(firestoreRepo)
 
-    val bestSellersResponseLiveData : LiveData<List<Item>> = getBestSellersUseCase.getBestSellers()
-    val newItemsResponseLiveData : LiveData<List<Item>> = getNewItemsUseCase.getNewItems()
-    val discountsResponseLiveData : LiveData<List<Item>> = getDiscountsUseCase.getDiscounts()
+    val bestSellersResponseLiveData : LiveData<List<Item>> = getBestSellersUseCase()
+    val newItemsResponseLiveData : LiveData<List<Item>> = getNewItemsUseCase()
+    val discountsResponseLiveData : LiveData<List<Item>> = getDiscountsUseCase()
 
 }

@@ -20,13 +20,13 @@ class MainActivityViewModel @Inject constructor(
     private val getSelectedItemsUseCase: GetSelectedItemsUseCase = GetSelectedItemsUseCase(roomRepo)
     private val signOutUseCase: SignOutUseCase = SignOutUseCase(signInRepo)
     private val isUserRegisteredUseCase: IsUserRegisteredUseCase = IsUserRegisteredUseCase(signInRepo)
-    val selectedItemLiveData: LiveData<List<SelectedItem>> = getSelectedItemsUseCase.getSelectedItems()
+    val selectedItemLiveData: LiveData<List<SelectedItem>> = getSelectedItemsUseCase()
 
     fun isUserRegistered(): Boolean {
-        return isUserRegisteredUseCase.isUserRegistered()
+        return isUserRegisteredUseCase()
     }
 
     fun signOut() {
-        signOutUseCase.signOut()
+        signOutUseCase()
     }
 }

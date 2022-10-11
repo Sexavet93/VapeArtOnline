@@ -35,7 +35,7 @@ class DetailsFragment : Fragment() {
     private lateinit var selectedItem: SelectedItem
     private lateinit var favoriteItem: FavoriteItem
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentDetailsBinding.inflate(inflater,container,false)
         return binding.root
     }

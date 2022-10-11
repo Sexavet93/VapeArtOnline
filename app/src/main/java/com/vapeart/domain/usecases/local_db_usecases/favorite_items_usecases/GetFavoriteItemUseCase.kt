@@ -6,7 +6,7 @@ import com.vapeart.domain.repositories.RoomRepository
 
 class GetFavoriteItemUseCase(private val roomRepo: RoomRepository) {
 
-    fun getFavoriteItem(id: String): LiveData<FavoriteItem>{
+    operator fun invoke(id: String): LiveData<FavoriteItem>{
         return roomRepo.getFavoriteItem(id)
     }
 }

@@ -14,7 +14,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsFragmentViewModel @Inject constructor(private var roomRepo: RoomRepository): ViewModel() {
+class DetailsFragmentViewModel @Inject constructor(roomRepo: RoomRepository): ViewModel() {
 
     lateinit var favoriteItemLiveData: LiveData<FavoriteItem>
     lateinit var selectedItemLiveData: LiveData<SelectedItem>
@@ -26,21 +26,21 @@ class DetailsFragmentViewModel @Inject constructor(private var roomRepo: RoomRep
     private val addSelectedItemUseCase: AddSelectedItemUseCase = AddSelectedItemUseCase(roomRepo)
 
     fun getFavoriteItem(id: String){
-        favoriteItemLiveData = getFavoriteItemUseCase.getFavoriteItem(id)
+        favoriteItemLiveData = getFavoriteItemUseCase(id)
     }
 
     fun getSelectedItem(id: String){
-        selectedItemLiveData = getSelectedItemItemUseCase.getSelectedItem(id)
+        selectedItemLiveData = getSelectedItemItemUseCase(id)
     }
 
     fun addFavoriteItem(item: FavoriteItem){
-        addFavoriteItemUseCase.addFavoriteItem(item)
+        addFavoriteItemUseCase(item)
     }
 
     fun deleteFavoriteItem(item: FavoriteItem){
-        deleteFavoriteItemUseCase.deleteFavoriteItem(item)
+        deleteFavoriteItemUseCase(item)
     }
     fun addSelectedItem(item: SelectedItem){
-        addSelectedItemUseCase.addSelectedItem(item)
+        addSelectedItemUseCase(item)
     }
 }

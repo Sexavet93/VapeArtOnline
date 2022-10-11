@@ -3,12 +3,14 @@ package com.vapeart.presentation.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
+import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
@@ -196,9 +198,17 @@ class MainActivity: AppCompatActivity(), Navigator, ViewsManager{
     override fun onBackPressed() {
         if (binding.drawerLayout.isOpen)
             binding.drawerLayout.closeDrawers()
-        if(navController.currentDestination?.id == R.id.signInFragment)
+        else if(navController.currentDestination?.id == R.id.signInFragment)
             finish()
-        else super.onBackPressed()
+        else {
+            super.onBackPressed()
+            when(navController.currentDestination?.id){
+                R.id.homeFragment -> binding.bottomNavigation.selectedItemId = R.id.homeFragment
+                R.id.wishListFragment -> binding.bottomNavigation.selectedItemId = R.id.wishListFragment
+                R.id.cartFragment -> binding.bottomNavigation.selectedItemId = R.id.cartFragment
+                R.id.searchFragment -> binding.bottomNavigation.selectedItemId = R.id.searchFragment
+            }
+        }
     }
 
     override fun drawerLayoutLock(lockMode: Int) {

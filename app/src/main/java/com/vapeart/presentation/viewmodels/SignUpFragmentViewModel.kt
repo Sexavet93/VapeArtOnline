@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpFragmentViewModel @Inject constructor(private var signUpRepo: SignUpRepository) : BaseViewModel() {
+class SignUpFragmentViewModel @Inject constructor(signUpRepo: SignUpRepository) : BaseViewModel() {
 
     private val signUpUseCase: SignUpUseCase = SignUpUseCase(signUpRepo)
 

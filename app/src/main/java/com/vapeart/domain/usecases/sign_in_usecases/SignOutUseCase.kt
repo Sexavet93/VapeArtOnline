@@ -4,7 +4,7 @@ import com.vapeart.domain.repositories.SignInRepository
 
 class SignOutUseCase(private val signInRepo: SignInRepository) {
 
-    fun signOut(){
+    operator fun invoke(){
         signInRepo.signOut()
     }
 }
