@@ -4,7 +4,7 @@ import com.vapeart.domain.repositories.SignInRepository
 
 class IsUserRegisteredUseCase(private val signInRepo: SignInRepository) {
 
-    fun isUserRegistered(): Boolean{
+    operator fun invoke(): Boolean{
         return signInRepo.isUserRegistered()
     }
 }

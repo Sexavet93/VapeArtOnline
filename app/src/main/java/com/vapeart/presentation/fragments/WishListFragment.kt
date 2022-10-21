@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vapeart.R
@@ -34,6 +33,12 @@ class WishListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setAdapter()
+        setViewModelObserver()
+        setRecyclerView()
+    }
+
+    private fun setAdapter(){
         adapter = WishListAdapter(object : ItemsManagerImpl(){
             override fun addToCart(item: SelectedItem) {
                 if(item.amount > 0){
@@ -47,11 +52,13 @@ class WishListFragment : Fragment() {
                 showToast(getString(R.string.delete_favorite_item))
             }
         })
+    }
+
+    private fun setViewModelObserver(){
         viewModel.favoriteItemsLiveData.observe(viewLifecycleOwner){
             adapter.submitList(it)
-            setDefaultTextView(it.isEmpty())
+            defaultTextViewVisibility(it.isEmpty())
         }
-        setRecyclerView()
     }
 
     private fun setRecyclerView(){
@@ -59,7 +66,7 @@ class WishListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
-    private fun setDefaultTextView(isEmpty: Boolean){
+    private fun defaultTextViewVisibility(isEmpty: Boolean){
         if(!isEmpty){
             binding.defaultTextView.visibility = View.GONE
         } else {

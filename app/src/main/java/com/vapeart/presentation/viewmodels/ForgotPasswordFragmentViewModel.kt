@@ -6,13 +6,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ForgotPasswordFragmentViewModel @Inject constructor(private var sigInRepo: SignInRepository): BaseViewModel() {
+class ForgotPasswordFragmentViewModel @Inject constructor(sigInRepo: SignInRepository): BaseViewModel() {
 
     private val sendPasswordResetEmailUseCase: SendPasswordResetEmailUseCase = SendPasswordResetEmailUseCase(sigInRepo)
 
     fun sendPasswordResetEmail(email: String): Boolean {
         return if(isEmailValidate(email)){
-            sendPasswordResetEmailUseCase.sendPasswordResetEmail(email) { isSuccessful, message ->
+            sendPasswordResetEmailUseCase(email) { isSuccessful, message ->
                 _isSuccess.value = isSuccessful
                 _exceptionMessage.value = message
             }

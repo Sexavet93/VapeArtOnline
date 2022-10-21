@@ -5,7 +5,7 @@ import com.vapeart.domain.repositories.RoomRepository
 
 class AddFavoriteItemUseCase(private val roomRepo: RoomRepository) {
 
-    fun addFavoriteItem(item: FavoriteItem){
+    operator fun invoke(item: FavoriteItem){
         roomRepo.addFavoriteItem(item)
     }
 }

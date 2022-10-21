@@ -5,7 +5,7 @@ import com.vapeart.domain.repositories.RoomRepository
 
 class DeleteSelectedItemUseCase(private val roomRepo: RoomRepository) {
 
-    fun deleteSelectedItem(item: SelectedItem){
+    operator fun invoke(item: SelectedItem){
         roomRepo.deleteSelectedItem(item)
     }
 }

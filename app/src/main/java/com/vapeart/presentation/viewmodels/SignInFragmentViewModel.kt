@@ -13,7 +13,7 @@ class SignInFragmentViewModel @Inject constructor(signInRepo: SignInRepository)
 
     fun signIn(email: String, password: String): Boolean {
         return if(isEmailValidate(email) && isPasswordValidate(password)){
-            signInUseCase.signIn(email, password) { isSuccessful, message ->
+            signInUseCase(email, password) { isSuccessful, message ->
                 _isSuccess.value = isSuccessful
                 _exceptionMessage.value = message
             }

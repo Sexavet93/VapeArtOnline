@@ -6,7 +6,7 @@ import com.vapeart.domain.models.Item
 
 class GetQueryItemsUseCase(private val firestoreRepo: FirestoreRepository) {
 
-    fun getQueryItemsList(query: String): MutableLiveData<List<Item>>{
+    operator fun invoke(query: String): MutableLiveData<List<Item>>{
         return firestoreRepo.getQueryItemsList(query)
     }
 }

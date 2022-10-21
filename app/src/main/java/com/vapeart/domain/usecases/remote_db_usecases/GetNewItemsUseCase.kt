@@ -6,7 +6,7 @@ import com.vapeart.domain.models.Item
 
 class GetNewItemsUseCase(private val firestoreRepo: FirestoreRepository) {
 
-    fun getNewItems(): MutableLiveData<List<Item>>{
+    operator fun invoke(): MutableLiveData<List<Item>>{
         return firestoreRepo.getNewItems()
     }
 }

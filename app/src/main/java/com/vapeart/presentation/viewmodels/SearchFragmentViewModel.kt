@@ -10,7 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchFragmentViewModel @Inject constructor(private val firebaseRepo: FirestoreRepository): ViewModel() {
+class SearchFragmentViewModel @Inject constructor(firebaseRepo: FirestoreRepository): ViewModel() {
 
     private val getSearchItemsUseCase: GetSearchItemsUseCase = GetSearchItemsUseCase(firebaseRepo)
     private var _requestItemList: MutableLiveData<List<Item>> = MutableLiveData()
@@ -18,7 +18,7 @@ class SearchFragmentViewModel @Inject constructor(private val firebaseRepo: Fire
         get() = _requestItemList
 
     fun getSearchItems(query: String){
-        getSearchItemsUseCase.getSearchItems(query){
+        getSearchItemsUseCase(query){
             _requestItemList.postValue(it)
         }
     }

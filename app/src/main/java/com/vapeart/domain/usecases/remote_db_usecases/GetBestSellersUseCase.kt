@@ -6,7 +6,7 @@ import com.vapeart.domain.models.Item
 
 class GetBestSellersUseCase(private val firestoreRepo: FirestoreRepository) {
 
-    fun getBestSellers(): MutableLiveData<List<Item>>{
+    operator fun invoke(): MutableLiveData<List<Item>>{
         return firestoreRepo.getBestSellers()
     }
 }
