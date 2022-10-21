@@ -23,9 +23,6 @@ class FirestoreRepositoryImpl @Inject constructor(private var firebaseCloud: Fir
     )
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
-
-    fun getReferencesListMet() = referencesList
-
     override fun getBestSellers(): MutableLiveData<List<Item>> {
         val bestSellersList: MutableList<Item> = mutableListOf()
         val liveData = MutableLiveData<List<Item>>()

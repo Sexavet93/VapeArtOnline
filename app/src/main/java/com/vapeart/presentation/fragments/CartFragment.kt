@@ -30,8 +30,8 @@ class CartFragment : Fragment() {
     private lateinit var adapter: CartAdapter
     private var itemsList: List<SelectedItem> = emptyList()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentCartBinding.inflate(inflater,container,false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentCartBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -59,12 +59,12 @@ class CartFragment : Fragment() {
 
     private fun setViewModelObserver(){
         viewModel.selectedItemsLiveData.observe(viewLifecycleOwner){
-            if(it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 binding.apply {
                     defaultTextView.visibility = View.GONE
                     bottomButtons.visibility = View.VISIBLE
                 }
-            } else{
+            } else {
                 binding.apply {
                     defaultTextView.visibility = View.VISIBLE
                     bottomButtons.visibility = View.GONE
@@ -77,7 +77,7 @@ class CartFragment : Fragment() {
 
     private fun setBottomButtonsListeners(){
         binding.clearAllCartButton.setOnClickListener{
-            val dialog = AlertDialog.Builder(requireContext())
+            AlertDialog.Builder(requireContext())
                 .setPositiveButton("Ok",){ _, _ ->
                     viewModel.deleteAllItems()
                 }
