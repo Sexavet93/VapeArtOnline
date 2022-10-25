@@ -15,8 +15,8 @@ import androidx.navigation.NavDirections
 import androidx.navigation.NavHost
 import androidx.navigation.navOptions
 import com.vapeart.R
-import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.ActivityMainBinding
+import com.vapeart.domain.models.SelectedItem
 import com.vapeart.presentation.fragments.HomeFragmentDirections
 import com.vapeart.presentation.utils.DeviceCategory
 import com.vapeart.presentation.utils.Navigator
@@ -97,6 +97,7 @@ class MainActivity: AppCompatActivity(), Navigator, ViewsManager{
                     R.id.cartFragment,
                     null,
                     navOptions { popUpTo(R.id.cartFragment) { inclusive = true } })
+                bottomNavigationSelectedItem(R.id.cartFragment)
             }
         }
     }
@@ -201,12 +202,16 @@ class MainActivity: AppCompatActivity(), Navigator, ViewsManager{
         else {
             super.onBackPressed()
             when(navController.currentDestination?.id){
-                R.id.homeFragment -> binding.bottomNavigation.selectedItemId = R.id.homeFragment
-                R.id.wishListFragment -> binding.bottomNavigation.selectedItemId = R.id.wishListFragment
-                R.id.cartFragment -> binding.bottomNavigation.selectedItemId = R.id.cartFragment
-                R.id.searchFragment -> binding.bottomNavigation.selectedItemId = R.id.searchFragment
+                R.id.homeFragment -> bottomNavigationSelectedItem(R.id.homeFragment)
+                R.id.wishListFragment -> bottomNavigationSelectedItem(R.id.wishListFragment)
+                R.id.cartFragment -> bottomNavigationSelectedItem(R.id.cartFragment)
+                R.id.searchFragment -> bottomNavigationSelectedItem(R.id.searchFragment)
             }
         }
+    }
+
+    private fun bottomNavigationSelectedItem(itemId: Int){
+        binding.bottomNavigation.selectedItemId = itemId
     }
 
     override fun drawerLayoutLock(lockMode: Int) {

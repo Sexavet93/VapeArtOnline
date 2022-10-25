@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class SelectedItem(
+data class SelectedItemEntity(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     var itemName: String = "",

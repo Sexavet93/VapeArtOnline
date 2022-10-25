@@ -1,10 +1,7 @@
 package com.vapeart.presentation.utils
 
 import android.graphics.drawable.Drawable
-import com.bumptech.glide.request.Request
 import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.target.SizeReadyCallback
-import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 
 abstract class GlideCustomTarget<T>: CustomTarget<T>() {

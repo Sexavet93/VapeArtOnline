@@ -1,8 +1,8 @@
 package com.vapeart.domain.repositories
 
 import androidx.lifecycle.LiveData
-import com.vapeart.data.room.FavoriteItem
-import com.vapeart.data.room.SelectedItem
+import com.vapeart.domain.models.FavoriteItem
+import com.vapeart.domain.models.SelectedItem
 
 interface RoomRepository {
 
