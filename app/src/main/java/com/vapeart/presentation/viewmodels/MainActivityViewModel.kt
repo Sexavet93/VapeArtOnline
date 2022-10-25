@@ -2,7 +2,7 @@ package com.vapeart.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.vapeart.data.room.SelectedItem
+import com.vapeart.domain.models.SelectedItem
 import com.vapeart.domain.repositories.RoomRepository
 import com.vapeart.domain.repositories.SignInRepository
 import com.vapeart.domain.usecases.local_db_usecases.selected_items_usecases.GetSelectedItemsUseCase

@@ -1,8 +1,7 @@
 package com.vapeart.presentation.utils
 
-import androidx.fragment.app.Fragment
-import com.vapeart.data.room.FavoriteItem
-import com.vapeart.data.room.SelectedItem
+import com.vapeart.domain.models.FavoriteItem
+import com.vapeart.domain.models.SelectedItem
 
 abstract class ItemsManagerImpl: ItemsManager {
 

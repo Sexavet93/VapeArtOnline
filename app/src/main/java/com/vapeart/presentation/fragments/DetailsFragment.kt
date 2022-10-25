@@ -13,10 +13,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vapeart.R
-import com.vapeart.data.room.FavoriteItem
-import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.FragmentDetailsBinding
+import com.vapeart.domain.models.FavoriteItem
 import com.vapeart.domain.models.Item
+import com.vapeart.domain.models.SelectedItem
 import com.vapeart.presentation.utils.Assistant
 import com.vapeart.presentation.viewmodels.DetailsFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint

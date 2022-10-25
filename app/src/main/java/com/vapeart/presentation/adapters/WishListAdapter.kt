@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.transition.Transition
 import com.vapeart.R
-import com.vapeart.data.room.FavoriteItem
-import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.WishListItemLayoutBinding
+import com.vapeart.domain.models.FavoriteItem
+import com.vapeart.domain.models.SelectedItem
 import com.vapeart.presentation.fragments.DEFAULT_ITEM_AMOUNT_SIZE
 import com.vapeart.presentation.utils.Assistant
 import com.vapeart.presentation.utils.DiffCallbacks

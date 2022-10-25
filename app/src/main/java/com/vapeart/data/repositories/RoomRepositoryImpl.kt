@@ -1,9 +1,11 @@
 package com.vapeart.data.repositories
 
 import androidx.lifecycle.LiveData
-import com.vapeart.data.room.FavoriteItem
+import com.vapeart.data.mappers.FavoriteItemMapper
+import com.vapeart.data.mappers.SelectedItemMapper
 import com.vapeart.data.room.RoomDao
-import com.vapeart.data.room.SelectedItem
+import com.vapeart.domain.models.FavoriteItem
+import com.vapeart.domain.models.SelectedItem
 import com.vapeart.domain.repositories.RoomRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,19 +33,27 @@ class RoomRepositoryImpl @Inject constructor(private var dao:RoomDao): RoomRepos
     }
 
     override fun addSelectedItem(item: SelectedItem){
-        coroutineScope.launch { dao.addSelectedItem(item) }
+        coroutineScope.launch {
+            val entityItem = SelectedItemMapper.selectedItemToEntity(item)
+            dao.addSelectedItem(entityItem) }
     }
 
     override fun addFavoriteItem(item: FavoriteItem){
-        coroutineScope.launch { dao.addFavoriteItem(item) }
+        coroutineScope.launch {
+            val entityItem = FavoriteItemMapper.favoriteItemToEntity(item)
+            dao.addFavoriteItem(entityItem) }
     }
 
     override fun deleteSelectedItem(item: SelectedItem){
-        coroutineScope.launch { dao.deleteSelectedItem(item) }
+        coroutineScope.launch {
+            val entityItem = SelectedItemMapper.selectedItemToEntity(item)
+            dao.deleteSelectedItem(entityItem) }
     }
 
     override fun deleteFavoriteItem(item: FavoriteItem){
-        coroutineScope.launch { dao.deleteFavoriteItem(item) }
+        coroutineScope.launch {
+            val entityItem = FavoriteItemMapper.favoriteItemToEntity(item)
+            dao.deleteFavoriteItem(entityItem) }
     }
 
     override fun deleteTable(){

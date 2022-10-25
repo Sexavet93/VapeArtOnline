@@ -1,9 +1,9 @@
 package com.vapeart.presentation.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.vapeart.data.room.FavoriteItem
-import com.vapeart.data.room.SelectedItem
+import com.vapeart.domain.models.FavoriteItem
 import com.vapeart.domain.models.Item
+import com.vapeart.domain.models.SelectedItem
 
 object DiffCallbacks {
 

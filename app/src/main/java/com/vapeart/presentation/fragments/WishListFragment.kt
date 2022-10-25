@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vapeart.R
-import com.vapeart.data.room.FavoriteItem
-import com.vapeart.data.room.SelectedItem
 import com.vapeart.databinding.FragmentWishListBinding
+import com.vapeart.domain.models.FavoriteItem
+import com.vapeart.domain.models.SelectedItem
 import com.vapeart.presentation.adapters.WishListAdapter
 import com.vapeart.presentation.utils.ItemsManagerImpl
 import com.vapeart.presentation.viewmodels.WishListFragmentViewModel
